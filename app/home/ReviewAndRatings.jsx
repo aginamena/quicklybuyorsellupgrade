@@ -6,7 +6,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import red from "@mui/material/colors/red";
 
-import CardCmp from "@/components/CardCmp";
+import ImageCard from "@/components/ImageCard";
 
 export default function ReveiwsAndRatings() {
   const reviews = [
@@ -40,7 +40,7 @@ export default function ReveiwsAndRatings() {
       <Grid container spacing={2}>
         {reviews.map(({ src, name, description }, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
-            <CardCmp>
+            <ImageCard>
               <CardHeader
                 avatar={
                   <Avatar
@@ -57,7 +57,7 @@ export default function ReveiwsAndRatings() {
                   {description}
                 </Typography>
               </CardContent>
-            </CardCmp>
+            </ImageCard>
           </Grid>
         ))}
       </Grid>

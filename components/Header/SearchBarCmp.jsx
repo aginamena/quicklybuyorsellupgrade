@@ -16,7 +16,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Configure, Hits, InstantSearch } from "react-instantsearch";
 
-import CardCmp from "../CardCmp";
+import ImageCard from "../ImageCard";
 import { StyledSearchBox } from "./style";
 
 //algolia credentials
@@ -59,7 +59,7 @@ export default function SearchBarCmp() {
                 hitComponent={({ hit }) => {
                   return (
                     <ListItem disablePadding component="div">
-                      <CardCmp>
+                      <ImageCard>
                         <Box sx={{ display: "flex" }}>
                           <Box
                             sx={{ display: "flex", flexDirection: "column" }}
@@ -92,7 +92,7 @@ export default function SearchBarCmp() {
                             alt={`Image of ${hit.title} product`}
                           />
                         </Box>
-                      </CardCmp>
+                      </ImageCard>
                     </ListItem>
                   );
                 }}

@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 
 import HowItWorks from "./HowItWorks";
 import ReveiwsAndRatings from "./ReviewAndRatings";
+import TodaysProducts from "./TodaysProducts";
 
 export default function Home() {
   return (
@@ -43,6 +44,7 @@ export default function Home() {
           Mena Agina - Founder & CEO
         </Typography>
       </Box>
+      <TodaysProducts />
       <HowItWorks />
       <ReveiwsAndRatings />
     </Container>

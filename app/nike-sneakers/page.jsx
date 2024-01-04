@@ -1,133 +1,192 @@
 // import {
 //   Box,
 //   Button,
-//   Container,
-//   Grid,
+//   Drawer,
+//   Paper,
+//   TextField,
 //   Toolbar,
 //   Typography,
+//   useMediaQuery,
 // } from "@mui/material";
-// import { useContext } from "react";
+// import DisplayProducts from "components/DisplayProducts";
+// import RadioGroupCmp from "components/RadioGroupCmp";
+// import { useState } from "react";
+// import InfiniteScroll from "react-infinite-scroll-component";
+// import { useInfiniteQuery } from "react-query";
 // import { useParams } from "react-router-dom";
+// import { getAllPublishedProducts } from "./util";
+// import { useTheme } from "@mui/material/styles";
 
-// import BackdropCmp from "components/BackdropCmp";
-// import { AppContext } from "context/appContext";
-// import { getFromFirestore, isUserAdmin } from "pages/util";
-// import { useQuery } from "react-query";
-// import Contact from "./Contact";
-// import ImageGalleryCmp from "./ImageGalleryCmp";
-// import Specification from "./Specification";
-// import { acceptProduct, rejectProduct } from "./util";
-// import { Helmet } from "react-helmet";
+// export default function NikeSneakers() {
+//   const { selectedCategory } = useParams();
+//   const [hasMore, setHasMore] = useState(true);
+//   const [filter, setFilter] = useState({});
 
-// export default function ProductDetails() {
-//   const { productId } = useParams();
+//   const theme = useTheme();
+//   const isMediumScreenSizeAndBelow = useMediaQuery(
+//     theme.breakpoints.down("md")
+//   );
+//   const [mobileOpen, setMobileOpen] = useState(false);
 
-//   const { setShowSnackbarCmp, setShowBackdropCmp } = useContext(AppContext);
-
-//   async function getProductDetails() {
-//     const details = await getFromFirestore(`products/${productId}`);
-//     const creatorOfProduct = await getFromFirestore(
-//       `profiles/${details.creatorOfProduct}`
-//     );
-//     return { ...details, creatorOfProduct };
-//   }
-
-//   const {
-//     data: productDetails,
-//     isLoading,
-//     isError,
-//   } = useQuery({
-//     queryKey: ["ProductDetails", productId],
-//     queryFn: getProductDetails,
+//   const { data, fetchNextPage, status } = useInfiniteQuery({
+//     //whenever the filter changes, or the selectedCategory changes, react-query triggers a refetch
+//     queryKey: ["PublishedProducts", selectedCategory, filter],
+//     queryFn: ({ pageParam: productId }) =>
+//       getAllPublishedProducts(selectedCategory, productId, setHasMore, filter),
+//     getNextPageParam: (lastPage) => {
+//       return lastPage[lastPage.length - 1]?.productId;
+//     },
 //   });
 
-//   const isAdmin = isUserAdmin();
-
-//   async function handleAccptProduct() {
-//     setShowBackdropCmp(true);
-//     await acceptProduct(productId);
-//     setShowBackdropCmp(false);
-//     setShowSnackbarCmp({
-//       shouldShow: true,
-//       message: "Product has been published to the marketplace",
-//     });
-//   }
-//   async function handleRejectProduct() {
-//     setShowBackdropCmp(true);
-//     await rejectProduct(productId);
-//     setShowBackdropCmp(false);
-//     setShowSnackbarCmp({
-//       shouldShow: true,
-//       message:
-//         "Product has been removed from review. Message or call the seller that their product has been rejected from review",
-//     });
-//   }
-
-//   if (isError) {
+//   if (status === "error") {
 //     alert("An error occured");
 //     return null;
 //   }
 
+//   const combinedPages = data?.pages.reduce((acc, page) => {
+//     return [...acc, ...page];
+//   }, []);
+
 //   return (
-//     <Container style={{ marginBottom: "50px" }}>
-//       <Toolbar />
-//       {isLoading ? (
-//         <Typography>Loading...</Typography>
-//       ) : (
-//         <>
-//           <Helmet>
-//             <title>
-//               {productDetails.title} | Quickly buy or sell your Nike shoes
-//             </title>
-//             <meta name="description" content={productDetails.description} />
-//             {/* Open Graph meta tags for Facebook sharing */}
-//             <meta
-//               property="og:title"
-//               content={`${productDetails.title} | Quickly buy or sell your Nike shoes`}
-//             />
-//             <meta
-//               property="og:description"
-//               content={productDetails.description}
-//             />
-//             <meta property="og:image" content={productDetails.files[0]} />
-//           </Helmet>
-//           <Grid container spacing={3}>
-//             {productDetails.files && (
-//               <Grid item md={8} xs={12}>
-//                 <ImageGalleryCmp images={productDetails.files} />
-//               </Grid>
-//             )}
-//             <Grid item md={4} xs={12}>
-//               <Contact
-//                 title={productDetails.title}
-//                 amount={productDetails.amount}
-//                 creatorOfProduct={productDetails.creatorOfProduct}
-//               />
-//             </Grid>
-//           </Grid>
-//           <Specification
-//             isAdmin={isAdmin}
-//             productId={productDetails.productId}
-//             productStatus={productDetails.productStatus}
-//             type={productDetails.type}
-//             description={productDetails.description}
-//           />
-//           {isAdmin && (
-//             <Box style={{ marginTop: "30px" }}>
-//               <Button color="success" onClick={handleAccptProduct}>
-//                 Accept product
-//               </Button>
-//               <Button color="error" onClick={handleRejectProduct}>
-//                 Reject product
-//               </Button>
-//               <BackdropCmp />
+//     <>
+//       {isMediumScreenSizeAndBelow && (
+//         <Button
+//           sx={{ margin: "20px 0 20px 30px" }}
+//           onClick={() => setMobileOpen(true)}
+//         >
+//           Filter products{" "}
+//         </Button>
+//       )}
+
+//       <Box
+//         sx={{
+//           display: "flex",
+//           justifyContent: "center",
+//         }}
+//       >
+//         <Drawer
+//           variant="permanent"
+//           {...(isMediumScreenSizeAndBelow && {
+//             variant: "temporary",
+//             open: mobileOpen,
+//           })}
+//           anchor="left"
+//           sx={{
+//             width: "250px",
+//             flexShrink: 0,
+//             [`& .MuiDrawer-paper`]: {
+//               width: "250px",
+//               boxSizing: "border-box",
+//             },
+//           }}
+//         >
+//           <Toolbar />
+//           {isMediumScreenSizeAndBelow && (
+//             <Box sx={{ textAlign: "right" }}>
+//               <Button onClick={() => setMobileOpen(false)}>Close</Button>
 //             </Box>
 //           )}
-//         </>
-//       )}
-//     </Container>
+
+//           <Typography
+//             variant="h5"
+//             style={{ margin: "30px 0", textAlign: "center" }}
+//           >
+//             Filter products
+//           </Typography>
+
+//           <Paper
+//             sx={{
+//               padding: "20px",
+//               margin: "0 20px",
+//             }}
+//           >
+//             <Typography sx={{ marginBottom: "15px" }} variant="h6">
+//               Type
+//             </Typography>
+//             <RadioGroupCmp
+//               values={["Male", "Female", "Unisex"]}
+//               name="type"
+//               previousValue={filter.type ? filter.type : ""}
+//               setFilter={setFilter}
+//             />
+//           </Paper>
+//           {/* <Paper sx={{ padding: "20px", marginTop: "30px", marginRight: "20px" }}>
+//     <Typography sx={{ marginBottom: "15px" }} variant="h6">
+//       Amount
+//     </Typography>
+//     <TextField
+//       id="outlined-number"
+//       label="From"
+//       type="number"
+//       sx={{ width: "100px" }}
+//       InputLabelProps={{
+//         shrink: true,
+//       }}
+//     />
+//     <span>----</span>
+//     <TextField
+//       id="outlined-number"
+//       label="To"
+//       type="number"
+//       sx={{ width: "100px" }}
+//       InputLabelProps={{
+//         shrink: true,
+//       }}
+//     />
+//     <Button sx={{ marginTop: "30px", width: "100%" }} variant="outlined">
+//       Search
+//     </Button>
+//   </Paper> */}
+//           {/* <Paper sx={{ padding: "20px", marginTop: "30px", marginRight: "20px" }}>
+//     <Typography sx={{ marginBottom: "15px" }} variant="h6">
+//       Condition
+//     </Typography>
+//     <RadioGroupCmp values={["New", "Used"]} />
+//   </Paper> */}
+//         </Drawer>
+//         <Box sx={{ width: { xs: "90%", md: "70%" } }}>
+//           {!isMediumScreenSizeAndBelow && <Toolbar />}
+//           {status === "loading" ? (
+//             <Typography>Loading...</Typography>
+//           ) : combinedPages.length == 0 ? (
+//             <Typography>No products for display.</Typography>
+//           ) : (
+//             <InfiniteScroll
+//               dataLength={combinedPages.length}
+//               next={fetchNextPage}
+//               hasMore={hasMore}
+//               loader={<Typography>Loading...</Typography>}
+//             >
+//               <DisplayProducts products={combinedPages} isPrivate={false} />
+//             </InfiniteScroll>
+//           )}
+//         </Box>
+//       </Box>
+//     </>
 //   );
 // }
-export default function NikeSneakers() {
-  return <div>nike sneakers</div>;
+// "use client";
+import DisplayProducts from "@/components/DisplayProducts";
+import {
+  collection,
+  firestore,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "@/config/firebase";
+import { executeQueryOnProductsCollection } from "@/util";
+import Paginage from "./Paginate";
+
+export default async function NikeSneakers() {
+  const q = query(
+    collection(firestore, "products"),
+    where("category", "==", "nike-sneakers"),
+    where("productStatus", "==", "Published"),
+    orderBy("productId", "desc"),
+    limit(12)
+  );
+
+  const top12Products = await executeQueryOnProductsCollection(q);
+  return <Paginage top12Products={top12Products} />;
 }

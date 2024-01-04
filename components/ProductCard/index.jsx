@@ -14,8 +14,9 @@ import Link from "next/link";
 import PopoverCmp from "./PopoverCmp";
 
 export default function Displaycard({
-  imagePath,
+  image,
   title,
+  description,
   amount,
   productId,
   isPrivate,
@@ -29,7 +30,15 @@ export default function Displaycard({
   return (
     <Link
       style={{ textDecoration: "none" }}
-      href={!isPrivate ? `../nike-sneakers/${productId}` : ""}
+      href={
+        !isPrivate
+          ? `../nike-sneakers/${productId}?title=${title
+              .trim()
+              .replaceAll(" ", "-")}&description=${description
+              .trim()
+              .replaceAll(" ", "-")}`
+          : ""
+      }
     >
       <Card>
         <CardHeader
@@ -53,7 +62,7 @@ export default function Displaycard({
         />
         <CardMedia
           component="img"
-          image={imagePath}
+          image={image}
           alt="Display card"
           style={{ height: 150 }}
         />
@@ -92,12 +101,3 @@ export default function Displaycard({
     </Link>
   );
 }
-
-Displaycard.propTypes = {
-  title: PropTypes.string.isRequired,
-  amount: PropTypes.string.isRequired,
-  imagePath: PropTypes.string.isRequired,
-  productId: PropTypes.string,
-  isPrivate: PropTypes.bool,
-  productStatus: PropTypes.string,
-};

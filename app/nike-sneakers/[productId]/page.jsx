@@ -6,7 +6,18 @@ import Contact from "./Contact";
 import ImageGalleryCmp from "./ImageGalleryCmp";
 import Specification from "./Specification";
 
-export default async function NikeSneakerDetails({ params }) {
+export function generateMetadata({ searchParams }) {
+  const { title, description } = searchParams;
+  return {
+    title:
+      title.replaceAll("-", " ") +
+      " | " +
+      "Quickly buy or sell your Nike shoes",
+    description: description.replaceAll("-", " "),
+  };
+}
+
+export default async function NikeSneakerDetails({ params, searchParams }) {
   const details = await getFromFirestore(`products/${params.productId}`);
   const creatorOfProduct = await getFromFirestore(
     `profiles/${details.creatorOfProduct}`

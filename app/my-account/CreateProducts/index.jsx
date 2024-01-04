@@ -139,6 +139,7 @@ export default function CreateProducts() {
         <SelectCmp
           name="Condition"
           menuItems={["New", "Used"]}
+          previousSelectedValue={specification.condition}
           handleSelect={(value) =>
             setSpecification({
               ...specification,

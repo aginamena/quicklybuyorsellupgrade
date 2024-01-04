@@ -6,8 +6,13 @@ import Select from "@mui/material/Select";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function SelectCmp({ name, menuItems, handleSelect }) {
-  const [state, setState] = useState("");
+export default function SelectCmp({
+  name,
+  menuItems,
+  handleSelect,
+  previousSelectedValue = "",
+}) {
+  const [state, setState] = useState(previousSelectedValue);
 
   const handleChange = (event) => {
     setState(event.target.value);

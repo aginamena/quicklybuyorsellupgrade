@@ -57,7 +57,7 @@ export default function PopoverCmp({ popup, setPopup, productId }) {
     >
       <Link
         style={{ textDecoration: "none", color: "white" }}
-        href={`../nike-sneaker/${productId}`}
+        href={`../nike-sneakers/${productId}`}
       >
         <Typography sx={{ p: 2, cursor: "pointer" }}>
           View created product

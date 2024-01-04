@@ -21,14 +21,14 @@ export async function getFromFirestore(path) {
   }
 }
 
-export function isUserAdmin() {
-  const currentUser = getUser();
-  return (
-    currentUser &&
-    (currentUser.email === process.env.REACT_APP_ADMIN ||
-      currentUser.email === process.env.REACT_APP_ADMIN2)
-  );
-}
+// export function isUserAdmin() {
+//   const currentUser = getUser();
+//   return (
+//     currentUser &&
+//     (currentUser.email === process.env.ADMIN ||
+//       currentUser.email === process.env.ADMIN2)
+//   );
+// }
 
 export async function executeQueryOnProductsCollection(query) {
   const querySnapshot = await getDocs(query);

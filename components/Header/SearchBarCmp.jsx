@@ -66,7 +66,7 @@ export default function SearchBarCmp() {
                           >
                             <CardContent sx={{ flex: "1 0 auto" }}>
                               <Link
-                                href={`nike-sneaker/${hit.productId}`}
+                                href={`nike-sneakers/${hit.productId}`}
                                 style={{
                                   color: "white",
                                 }}

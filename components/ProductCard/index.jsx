@@ -29,7 +29,7 @@ export default function Displaycard({
   return (
     <Link
       style={{ textDecoration: "none" }}
-      href={!isPrivate && `../nike-sneaker-details/${productId}`}
+      href={!isPrivate ? `../nike-sneaker-details/${productId}` : ""}
     >
       <Card>
         <CardHeader
@@ -92,9 +92,6 @@ export default function Displaycard({
     </Link>
   );
 }
-Displaycard.defaultProps = {
-  isPrivate: false,
-};
 
 Displaycard.propTypes = {
   title: PropTypes.string.isRequired,

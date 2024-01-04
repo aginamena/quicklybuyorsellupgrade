@@ -1,13 +1,15 @@
-import { Backdrop, CircularProgress } from "@mui/material/";
-// import { AppContext } from "context/appContext";
-// import { useContext } from s"react";
+"use client";
 
-export default function BackdropCmp() {
-  // const { showBackdropCmp } = useContext(AppContext);
+import { Backdrop, CircularProgress } from "@mui/material/";
+
+export default function BackdropCmp({ open }) {
   return (
     <Backdrop
-      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      // open={showBackdropCmp}
+      sx={{
+        color: "#fff",
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+      open={open}
     >
       <CircularProgress color="inherit" />
     </Backdrop>

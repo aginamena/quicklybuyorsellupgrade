@@ -8,17 +8,18 @@ import PropTypes from "prop-types";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Link from "next/link";
+import { useMyAccountContext } from "@/context/myAccount";
 
 export default function PopoverCmp({ popup, setPopup, productId }) {
   //snackbar can be used also to delete product
-  const {
-    setShowSnackbarCmp,
-    setShowBackdropCmp,
-    setShowDialogCmp,
-    setSelectedProductId,
-  } = {};
+  // const {
+  //   setShowSnackbarCmp,
+  //   setShowBackdropCmp,
+  //   setShowDialogCmp,
+  //   setSelectedProductId,
+  // } = {};
   // useContext(AppContext);
-  const { setTabPosition } = {};
+  const { setTabPosition, setSelectedProductId } = useMyAccountContext();
   //  useContext(MyAccountContext);
 
   function editProduct() {

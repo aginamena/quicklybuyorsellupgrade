@@ -9,12 +9,7 @@ import CreateProducts from "./CreateProducts";
 import TabPanel from "./TabPanel";
 import ViewProducts from "./ViewProducts";
 import { TabCmp } from "./style";
-// import { MyAccountContext } from "@/context";
-import { QueryClient, QueryClientProvider } from "react-query";
-import {
-  MyAccountContextWrapper,
-  useMyAccountContext,
-} from "@/context/myAccount";
+import { MyAccountContextWrapper } from "@/context/myAccount";
 
 export default function MyAccount() {
   const theme = useTheme();
@@ -46,9 +41,7 @@ export default function MyAccount() {
           <CreateProducts />
         </TabPanel>
         <TabPanel value={tabPosition} index={1}>
-          <QueryClientProvider client={new QueryClient()}>
-            <ViewProducts />
-          </QueryClientProvider>
+          <ViewProducts />
         </TabPanel>
       </Container>
     </MyAccountContextWrapper>

@@ -1,47 +1,52 @@
-import { Container, Toolbar, Typography } from "@mui/material";
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useInfiniteQuery } from "react-query";
 
-import { getAllProducts } from "./util";
+import { Container, Typography } from "@mui/material";
+
 import DisplayProducts from "@/components/DisplayProducts";
 import { getUser } from "@/util";
+import { getAllProducts } from "./util";
 
 export default function ViewProducts() {
+  const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
-  const user = getUser();
+  const [products, setProducts] = useState([]);
 
-  const { data, fetchNextPage, status } = useInfiniteQuery({
-    queryKey: ["ViewProducts"],
-    queryFn: ({ pageParam: productId }) =>
-      getAllProducts(user.email, productId, setHasMore),
-    getNextPageParam: (lastPage) => lastPage[lastPage.length - 1]?.productId,
-  });
+  const userEmail = useRef("");
 
-  if (status === "error") {
-    alert("An error occured");
-    return null;
-  }
-  const combinedPages = data?.pages.reduce((acc, page) => {
-    return [...acc, ...page];
+  useEffect(() => {
+    async function init() {
+      setLoading(true);
+      const { email } = getUser();
+      userEmail.current = email;
+      const top12Products = await getAllProducts(email, "", setHasMore);
+      setProducts(top12Products);
+      setLoading(false);
+    }
+    init();
   }, []);
+
+  async function getNext12Products() {
+    const top12Products = await getAllProducts(
+      userEmail.current,
+      products[products.length - 1].productId,
+      setHasMore
+    );
+    setProducts([...products, ...top12Products]);
+  }
 
   return (
     <Container>
-      <Toolbar />
-      {status === "loading" ? (
+      {loading ? (
         <Typography>Loading...</Typography>
-      ) : combinedPages.length == 0 ? (
-        <Typography>You don&apos;t have any products to display</Typography>
       ) : (
         <InfiniteScroll
-          dataLength={combinedPages.length}
-          next={fetchNextPage}
+          dataLength={products.length}
+          next={getNext12Products}
           hasMore={hasMore}
           loader={<Typography>Loading...</Typography>}
         >
-          <DisplayProducts products={combinedPages} isPrivate={true} />
+          <DisplayProducts products={products} isPrivate={true} />
         </InfiniteScroll>
       )}
     </Container>

@@ -1,7 +1,7 @@
 "use client";
 
 import { executeQueryOnProductsCollection } from "@/util";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Container } from "@mui/material";
 
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -40,7 +40,7 @@ export default function Paginage({ top12Products }) {
   }
 
   return (
-    <Box>
+    <Container>
       <InfiniteScroll
         dataLength={products.length}
         next={getNext12Products}
@@ -49,6 +49,6 @@ export default function Paginage({ top12Products }) {
       >
         <DisplayProducts products={products} isPrivate={false} />
       </InfiniteScroll>
-    </Box>
+    </Container>
   );
 }

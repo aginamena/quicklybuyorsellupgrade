@@ -1,14 +1,20 @@
 import {
   auth,
+  collection,
   deleteDoc,
   doc,
   firestore,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   provider,
+  query,
   setDoc,
   signInWithPopup,
+  startAfter,
   updateDoc,
+  where,
 } from "@/config/firebase";
 
 export async function getFromFirestore(path) {
@@ -21,14 +27,14 @@ export async function getFromFirestore(path) {
   }
 }
 
-// export function isUserAdmin() {
-//   const currentUser = getUser();
-//   return (
-//     currentUser &&
-//     (currentUser.email === process.env.ADMIN ||
-//       currentUser.email === process.env.ADMIN2)
-//   );
-// }
+export function isUserAdmin() {
+  const currentUser = getUser();
+  return (
+    currentUser &&
+    (currentUser.email === process.env.NEXT_PUBLIC_ADMIN ||
+      currentUser.email === process.env.NEXT_PUBLIC_ADMIN2)
+  );
+}
 
 export async function executeQueryOnProductsCollection(query) {
   const querySnapshot = await getDocs(query);
@@ -57,4 +63,22 @@ export async function storeDataInFirestore(path, data) {
 export async function signInWithGoogle() {
   const user = await signInWithPopup(auth, provider);
   return user;
+}
+
+export async function getNext12Products(products, setProducts, setHasMore) {
+  const selectedCategory = "nike-sneakers";
+  const q = query(
+    collection(firestore, "products"),
+    where("category", "==", selectedCategory),
+    where("productStatus", "==", "Published"),
+    orderBy("productId", "desc"),
+    //   ...filterCondition,
+    startAfter(products[products.length - 1].productId),
+    limit(13)
+  );
+  const next12Products = await executeQueryOnProductsCollection(q);
+  if (next12Products.length < 13) {
+    setHasMore(false);
+  }
+  setProducts([...products, ...next12Products.splice(0, 12)]);
 }

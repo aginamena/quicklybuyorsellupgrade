@@ -1,14 +1,21 @@
 "use client";
 
+import { isUserAdmin } from "@/util";
 import { Box, Paper, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 export default function Specification({
-  isAdmin,
   type,
   description,
   productId,
   productStatus,
 }) {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(isUserAdmin());
+  }, []);
+
   return (
     <Paper style={{ padding: "30px", marginTop: "40px" }}>
       <Box style={{ marginBottom: "40px" }}>

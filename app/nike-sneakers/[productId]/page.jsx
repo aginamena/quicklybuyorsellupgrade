@@ -24,10 +24,6 @@ export default async function NikeSneakerDetails({ params, searchParams }) {
   );
   const productDetails = { ...details, creatorOfProduct };
 
-  const isAdmin =
-    productDetails.creatorOfProduct.email == process.env.ADMIN ||
-    productDetails.creatorOfProduct.email == process.env.ADMIN2;
-
   return (
     <Container style={{ marginBottom: "50px" }}>
       <Toolbar />
@@ -46,13 +42,12 @@ export default async function NikeSneakerDetails({ params, searchParams }) {
         </Grid>
       </Grid>
       <Specification
-        isAdmin={isAdmin}
         productId={productDetails.productId}
         productStatus={productDetails.productStatus}
         type={productDetails.type}
         description={productDetails.description}
       />
-      <AdminPanel isAdmin={isAdmin} productId={params.productId} />
+      <AdminPanel productId={params.productId} />
     </Container>
   );
 }

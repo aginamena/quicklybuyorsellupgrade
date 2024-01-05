@@ -64,21 +64,3 @@ export async function signInWithGoogle() {
   const user = await signInWithPopup(auth, provider);
   return user;
 }
-
-export async function getNext12Products(products, setProducts, setHasMore) {
-  const selectedCategory = "nike-sneakers";
-  const q = query(
-    collection(firestore, "products"),
-    where("category", "==", selectedCategory),
-    where("productStatus", "==", "Published"),
-    orderBy("productId", "desc"),
-    //   ...filterCondition,
-    startAfter(products[products.length - 1].productId),
-    limit(13)
-  );
-  const next12Products = await executeQueryOnProductsCollection(q);
-  if (next12Products.length < 13) {
-    setHasMore(false);
-  }
-  setProducts([...products, ...next12Products.splice(0, 12)]);
-}

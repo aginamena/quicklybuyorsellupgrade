@@ -8,9 +8,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { AppContextWrapper } from "@/context/app";
-import BackdropCmp from "@/components/BackdropCmp";
-import SnackbarCmp from "@/components/SnackbarCmp";
-import DialogCmp from "@/components/DialogCmp";
 
 export default function RootLayout({ children }) {
   return (
@@ -22,9 +19,6 @@ export default function RootLayout({ children }) {
             {children}
             <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
             <Footer />
-            <BackdropCmp />
-            <SnackbarCmp />
-            <DialogCmp />
           </AppContextWrapper>
         </ThemeRegistry>
       </body>

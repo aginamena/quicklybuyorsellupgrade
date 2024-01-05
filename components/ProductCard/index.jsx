@@ -31,13 +31,13 @@ export default function Displaycard({
     <Link
       style={{ textDecoration: "none" }}
       href={
-        !isPrivate
-          ? `../nike-sneakers/${productId}?title=${title
+        isPrivate
+          ? ""
+          : `../nike-sneakers/${productId}?title=${title
               .trim()
               .replaceAll(" ", "-")}&description=${description
               .trim()
               .replaceAll(" ", "-")}`
-          : ""
       }
     >
       <Card>

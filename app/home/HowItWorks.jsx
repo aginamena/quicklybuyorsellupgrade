@@ -4,7 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-import ImageCard from "@/components/ImageCard";
+import CardCmp from "@/components/CardCmp";
 
 export default function HowItWorks() {
   const cards = [
@@ -39,7 +39,7 @@ export default function HowItWorks() {
       <Grid container spacing={2}>
         {cards.map(({ title, imagePath }, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <ImageCard>
+            <CardCmp>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -54,7 +54,7 @@ export default function HowItWorks() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-            </ImageCard>
+            </CardCmp>
           </Grid>
         ))}
       </Grid>

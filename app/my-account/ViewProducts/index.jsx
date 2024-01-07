@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import DisplayProducts from "@/components/DisplayProducts";
 import { getUser } from "@/util";
@@ -36,7 +36,7 @@ export default function ViewProducts() {
   }
 
   return (
-    <Container>
+    <>
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (
@@ -49,6 +49,6 @@ export default function ViewProducts() {
           <DisplayProducts products={products} isPrivate={true} />
         </InfiniteScroll>
       )}
-    </Container>
+    </>
   );
 }

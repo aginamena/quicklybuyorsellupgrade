@@ -1,7 +1,5 @@
-import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
@@ -11,6 +9,7 @@ import { ParentCmp } from "./style";
 
 import Auth from "./Auth";
 import SearchBarCmp from "./SearchBarCmp";
+import Hambuger from "./Hambuger";
 
 export default function Header() {
   return (
@@ -18,16 +17,7 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box style={{ display: "flex" }}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-
+            <Hambuger />
             <Box style={{ display: "flex", alignItems: "center" }}>
               <Link style={{ textDecoration: "none", color: "white" }} href="/">
                 <Typography
@@ -62,6 +52,9 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+      <Box sx={{ marginTop: "10px", display: { xs: "block", sm: "none" } }}>
+        <SearchBarCmp />
+      </Box>
     </ParentCmp>
   );
 }

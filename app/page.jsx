@@ -26,12 +26,23 @@ export default function Home() {
             textAlign: { xs: "center" },
           }}
         >
-          Getting your desired Nike <br /> shoe can be faster and safer
+          <Typography
+            variant="h5"
+            sx={{ marginBottom: { xs: "20px", md: "0" } }}
+          >
+            Getting your desired Nike <br /> shoe can be faster and safer
+          </Typography>
+
           <Image
             alt="Man looking at his phone and smiling"
             src="/root/introduction_image.jpg"
             width={500}
             height={392}
+            style={{
+              maxHeight: "392px",
+              maxWidth: "500px",
+            }}
+            layout="responsive"
             priority={true}
           />
         </Box>

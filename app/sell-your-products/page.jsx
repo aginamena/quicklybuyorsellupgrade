@@ -1,18 +1,16 @@
-import {
-  Avatar,
-  Box,
-  CardActionArea,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Container,
-  Divider,
-  Grid,
-  Rating,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { red } from "@mui/material/colors";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Rating from "@mui/material/Rating";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import red from "@mui/material/colors/red";
 
 import CardCmp from "@/components/CardCmp";
 import Footer from "@/components/Footer";

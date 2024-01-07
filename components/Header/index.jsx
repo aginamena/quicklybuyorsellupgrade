@@ -62,6 +62,10 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+      <div style={{ marginTop: "10px" }}></div>
+      <Box sx={{ display: { xs: "block", sm: "none" } }}>
+        <SearchBarCmp />
+      </Box>
     </ParentCmp>
   );
 }

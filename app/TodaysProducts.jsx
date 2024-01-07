@@ -31,7 +31,7 @@ export default async function TodaysProducts() {
     <Container>
       <Toolbar />
       <Typography
-        variant="h5"
+        variant="h6"
         style={{ textAlign: "center", marginBottom: "30px" }}
       >
         Todays products

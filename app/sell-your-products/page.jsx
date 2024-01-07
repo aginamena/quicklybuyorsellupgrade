@@ -1,5 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -8,38 +9,37 @@ import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import red from "@mui/material/colors/red";
 
 import CardCmp from "@/components/CardCmp";
 import Footer from "@/components/Footer";
+import ValuePosition from "@/components/ValueProposition";
 
 export default function SellYourProducts() {
   const cards = [
     {
-      title: "Free product listing",
-      imagePath: "sellYourProducts/free.png",
+      title: "Inventory Management",
+      imagePath: "sellYourProducts/inventory_management.jpg",
       description:
-        "List an unlimited number of products for sale in our marketplace without any cost.",
+        "Organize and manage all your products in one centralized platform.",
     },
     {
-      title: "Manage all your products for sale all in one place",
-      imagePath: "sellYourProducts/target_icon.jpg",
+      title: "Access to wider audience",
+      imagePath: "sellYourProducts/reach_wider_audience.png",
       description:
-        "We ensure your products are visible to buyers genuinely interested in what you're selling.",
+        "Tap into our extensive customer base as well as other audiences on social media platforms.",
     },
-    // {
-    //   title: "Targeted exposure",
-    //   imagePath: "sellYourProducts/target_icon.jpg",
-    //   description:
-    //     "We ensure your products are visible to buyers genuinely interested in what you're selling.",
-    // },
     {
-      title: "Communication hub",
-      imagePath: "sellYourProducts/communication_hub.jpg",
+      title: "Instant Communication",
+      imagePath: "sellYourProducts/communicate_with_customer.jpg",
+      description: "Use whatsapp to communicate directly with your customer.",
+    },
+    {
+      title: "Secure payment transaction flow",
+      imagePath: "sellYourProducts/secure_payment.jpg",
       description:
-        "Connect effortlessly with buyers through diverse communication channels, including chat, voice recordings, video, and more",
+        "Experience a secure and reliable payment transaction flow, that ensures the safety of every transaction.",
     },
   ];
 
@@ -67,10 +67,26 @@ export default function SellYourProducts() {
   return (
     <>
       <Container>
-        <Toolbar />
+        <ValuePosition proposition="Sell you Nike shoes today!" />
+
+        <Box style={{ textAlign: "center", color: "#dedede" }}>
+          <Box style={{ fontSize: "19px" }}>
+            Our sellers are at core of our business and we are making it
+            possible for your to sell your products as quickly as possible on
+            our platform. We provide tools to make the selling faster, easier
+            and safer from managing your inventory to transaction processing on
+            our platform. <br />
+            We want you to start selling your Products from day one of
+            registering and listing your products in the site.
+          </Box>
+          <Typography style={{ marginTop: "20px" }}>
+            Mena Agina - Founder & CEO
+          </Typography>
+        </Box>
+
         <Typography
-          variant="h5"
-          sx={{ textAlign: "center", marginBottom: "30px", marginTop: "30px" }}
+          variant="h6"
+          sx={{ textAlign: "center", marginBottom: "30px", marginTop: "50px" }}
         >
           We Offer
         </Typography>
@@ -104,16 +120,23 @@ export default function SellYourProducts() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            flexDirection: "column",
             marginTop: "50px",
             marginBottom: "50px",
           }}
         >
-          <Typography variant="h4">Sign in today!</Typography>
-          {/* <Button>Sign in today!</Button> */}
+          <Typography variant="h5">Sell you Nike shoes today!</Typography>
+          <Button
+            variant="outlined"
+            style={{ marginTop: "20px", textAlign: "center" }}
+            size="large"
+          >
+            Sign in
+          </Button>
         </Box>
         <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
         <Typography
-          variant="h5"
+          variant="h6"
           style={{
             textAlign: "center",
             marginTop: "30px",

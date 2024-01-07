@@ -31,7 +31,7 @@ export default function HowItWorks() {
   return (
     <>
       <Typography
-        variant="h5"
+        variant="h6"
         sx={{ textAlign: "center", marginBottom: "30px", marginTop: "30px" }}
       >
         How it works

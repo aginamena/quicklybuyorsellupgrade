@@ -32,7 +32,7 @@ export default function ReveiwsAndRatings() {
   return (
     <>
       <Typography
-        variant="h5"
+        variant="h6"
         style={{ textAlign: "center", marginTop: "30px", marginBottom: "30px" }}
       >
         What our customers say

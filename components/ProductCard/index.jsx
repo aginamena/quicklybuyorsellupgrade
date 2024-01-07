@@ -58,6 +58,8 @@ export default function Displaycard({
                   productId={productId}
                   popup={popup}
                   setPopup={() => setPopup(null)}
+                  title={title}
+                  description={description}
                 />
               </>
             )

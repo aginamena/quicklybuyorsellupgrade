@@ -109,6 +109,7 @@ export default function CreateProducts() {
       }
       loadProduct();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProductId]);
 
   if (loading) {

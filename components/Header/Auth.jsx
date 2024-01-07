@@ -35,7 +35,8 @@ export default function Auth() {
     if (takePhoneNumber.number.length > 0) {
       createProfile();
     }
-  }, [takePhoneNumber.number]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [takePhoneNumber]);
 
   function logout() {
     localStorage.removeItem("user");

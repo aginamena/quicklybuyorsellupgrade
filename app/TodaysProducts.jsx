@@ -1,4 +1,8 @@
-import { Button, Box, Container, Toolbar, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Toolbar from "@mui/material/Toolbar";
 
 import {
   collection,

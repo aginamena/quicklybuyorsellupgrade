@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react";
+
 import ThemeRegistry from "@/config/ThemeRegistry";
 
 import Header from "@/components/Header";
@@ -18,6 +20,7 @@ export default function RootLayout({ children }) {
             {children}
           </AppContextWrapper>
         </ThemeRegistry>
+        <Analytics />
       </body>
     </html>
   );

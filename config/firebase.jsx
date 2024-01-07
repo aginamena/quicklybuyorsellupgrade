@@ -1,4 +1,3 @@
-import { getAnalytics, isSupported } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
@@ -47,10 +46,6 @@ const provider = new GoogleAuthProvider();
 const firestore = getFirestore(app);
 const auth = getAuth();
 const storage = getStorage(app);
-async function isWebEnvironment() {
-  if (await isSupported()) getAnalytics(app);
-}
-isWebEnvironment();
 
 export {
   auth,

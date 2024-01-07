@@ -19,7 +19,13 @@ import BackdropCmp from "../BackdropCmp";
 import DialogCmp from "../DialogCmp";
 import SnackbarCmp from "../SnackbarCmp";
 
-export default function PopoverCmp({ popup, setPopup, productId }) {
+export default function PopoverCmp({
+  popup,
+  setPopup,
+  productId,
+  title,
+  description,
+}) {
   const { setTabPosition, setSelectedProductId } = useMyAccountContext();
   const [dialogCmp, setDialogCmp] = useState(false);
   const [backdropCmp, setBackdropCmp] = useState(false);
@@ -68,7 +74,11 @@ export default function PopoverCmp({ popup, setPopup, productId }) {
     >
       <Link
         style={{ textDecoration: "none", color: "white" }}
-        href={`../nike-sneakers/${productId}`}
+        href={`../nike-sneakers/${productId}?title=${title
+          .trim()
+          .replaceAll(" ", "-")}&description=${description
+          .trim()
+          .replaceAll(" ", "-")}`}
       >
         <Typography sx={{ p: 2, cursor: "pointer" }}>
           View created product

@@ -60,13 +60,25 @@ export default function SearchBarCmp() {
                   return (
                     <ListItem disablePadding component="div">
                       <CardCmp>
-                        <Box sx={{ display: "flex" }}>
+                        <Box>
                           <Box
-                            sx={{ display: "flex", flexDirection: "column" }}
+                            sx={{
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
                           >
                             <CardContent sx={{ flex: "1 0 auto" }}>
                               <Link
-                                href={`nike-sneakers/${hit.productId}`}
+                                href={`nike-sneakers/${
+                                  hit.productId
+                                }?title=${hit.title
+                                  .trim()
+                                  .replaceAll(
+                                    " ",
+                                    "-"
+                                  )}&description=${hit.description
+                                  .trim()
+                                  .replaceAll(" ", "-")}`}
                                 style={{
                                   color: "white",
                                 }}
@@ -75,14 +87,6 @@ export default function SearchBarCmp() {
                                   {hit.title}
                                 </Typography>
                               </Link>
-
-                              <Typography
-                                variant="subtitle1"
-                                color="text.secondary"
-                                component="div"
-                              >
-                                {hit.description}
-                              </Typography>
                             </CardContent>
                           </Box>
                           <CardMedia

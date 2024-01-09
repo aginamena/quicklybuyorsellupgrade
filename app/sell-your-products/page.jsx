@@ -1,6 +1,5 @@
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -120,19 +119,11 @@ export default function SellYourProducts() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexDirection: "column",
             marginTop: "50px",
             marginBottom: "50px",
           }}
         >
           <Typography variant="h5">Sell you Nike shoes today!</Typography>
-          <Button
-            variant="outlined"
-            style={{ marginTop: "20px", textAlign: "center" }}
-            size="large"
-          >
-            Sign in
-          </Button>
         </Box>
         <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
         <Typography

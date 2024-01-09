@@ -20,7 +20,7 @@ export default function DrawerCmp({ open, setDrawerCmp }) {
           marginBottom: "20px",
         }}
       />
-      <Link href="sell-your-products">
+      <Link href="../sell-your-products">
         <Typography
           sx={{
             marginTop: "40px",

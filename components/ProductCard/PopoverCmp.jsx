@@ -73,6 +73,8 @@ export default function PopoverCmp({
         style={{ textDecoration: "none", color: "white" }}
         href={`../nike-sneakers/${productId}?title=${title
           .trim()
+          .replaceAll(" ", "-")}&description=${description
+          .trim()
           .replaceAll(" ", "-")}`}
       >
         <Typography sx={{ p: 2, cursor: "pointer" }}>

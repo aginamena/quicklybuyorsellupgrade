@@ -1,21 +1,32 @@
 import { Container, Grid, Toolbar } from "@mui/material";
 
-import Head from "next/head";
-
 import { getFromFirestore } from "@/util";
 import AdminPanel from "./AdminPanel";
 import Contact from "./Contact";
 import ImageGalleryCmp from "./ImageGalleryCmp";
 import Specification from "./Specification";
 
-export function generateMetadata({ searchParams }) {
-  const { title, description } = searchParams;
+export async function generateMetadata({ params, searchParams }) {
+  const details = await getFromFirestore(`products/${params.productId}`);
+  const creatorOfProduct = await getFromFirestore(
+    `profiles/${details.creatorOfProduct}`
+  );
+  const productDetails = { ...details, creatorOfProduct };
+  // const { title, description } = searchParams;
+  const parsedTitle =
+    productDetails.title.replaceAll("-", " ") +
+    " | " +
+    "Quickly buy or sell your Nike shoes";
+  const parsedDescription = productDetails.description.replaceAll("-", " ");
+
   return {
-    title:
-      title.replaceAll("-", " ") +
-      " | " +
-      "Quickly buy or sell your Nike shoes",
-    description: description.replaceAll("-", " "),
+    title: parsedTitle,
+    description: parsedDescription,
+    openGraph: {
+      title: parsedTitle,
+      description: parsedDescription,
+      images: productDetails.files,
+    },
   };
 }
 
@@ -28,18 +39,6 @@ export default async function NikeSneakerDetails({ params }) {
 
   return (
     <Container style={{ marginBottom: "50px" }}>
-      <Head>
-        <meta
-          property="og:title"
-          content={
-            productDetails.title +
-            " | " +
-            "Quickly buy or sell your Nike shoes today!"
-          }
-        />
-        <meta property="og:description" content={productDetails.description} />
-        <meta property="og:image" content={productDetails.files[0]} />
-      </Head>
       <Toolbar />
       <Grid container spacing={3}>
         {productDetails.files && (

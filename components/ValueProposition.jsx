@@ -1,5 +1,5 @@
 "use client";
-import { Button, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export default function ValuePosition({ proposition }) {
@@ -23,13 +23,6 @@ export default function ValuePosition({ proposition }) {
     >
       <Box sx={{ textAlign: "center" }}>
         <Typography variant="h5">{proposition}</Typography>
-        <Button
-          variant="outlined"
-          sx={{ marginTop: "20px", marginBottom: { xs: "30px", md: "0" } }}
-          size="large"
-        >
-          Sign in
-        </Button>
       </Box>
       <Img alt="Nike sneaker shoe" src="/sellYourProducts/nike_shoe.png" />
     </Box>

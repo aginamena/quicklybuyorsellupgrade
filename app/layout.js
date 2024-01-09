@@ -5,7 +5,6 @@ import ThemeRegistry from "@/config/ThemeRegistry";
 
 import Header from "@/components/Header";
 
-import { AppContextWrapper } from "@/context/app";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -16,10 +15,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <ThemeRegistry options={{ key: "mui" }}>
-          <AppContextWrapper>
-            <Header />
-            {children}
-          </AppContextWrapper>
+          <Header />
+          {children}
         </ThemeRegistry>
         <Analytics />
         <SpeedInsights />

@@ -1,5 +1,7 @@
 import { Container, Grid, Toolbar } from "@mui/material";
 
+import Head from "next/head";
+
 import { getFromFirestore } from "@/util";
 import AdminPanel from "./AdminPanel";
 import Contact from "./Contact";
@@ -17,7 +19,7 @@ export function generateMetadata({ searchParams }) {
   };
 }
 
-export default async function NikeSneakerDetails({ params, searchParams }) {
+export default async function NikeSneakerDetails({ params }) {
   const details = await getFromFirestore(`products/${params.productId}`);
   const creatorOfProduct = await getFromFirestore(
     `profiles/${details.creatorOfProduct}`
@@ -26,6 +28,18 @@ export default async function NikeSneakerDetails({ params, searchParams }) {
 
   return (
     <Container style={{ marginBottom: "50px" }}>
+      <Head>
+        <meta
+          property="og:title"
+          content={
+            productDetails.title +
+            " | " +
+            "Quickly buy or sell your Nike shoes today!"
+          }
+        />
+        <meta property="og:description" content={productDetails.description} />
+        <meta property="og:image" content={productDetails.files[0]} />
+      </Head>
       <Toolbar />
       <Grid container spacing={3}>
         {productDetails.files && (

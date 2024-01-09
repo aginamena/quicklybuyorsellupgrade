@@ -52,12 +52,9 @@ export default function PopoverCmp({
 
   async function shareOnFacebook() {
     // Open a new window to share the link on Facebook
-    const host =
-      process.env.NODE_ENV === "development"
-        ? "http://192.168.0.23:3000"
-        : "https://quicklybuyorsell.web.app";
+    const host = "https://quicklybuyorsellupgrade.vercel.app";
     window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${host}/#/product-details/${productId}`,
+      `https://www.facebook.com/sharer/sharer.php?u=${host}/nike-sneakers/${productId}?title=${title}&description=${description}`,
       "_blank"
     );
   }
@@ -75,8 +72,6 @@ export default function PopoverCmp({
       <Link
         style={{ textDecoration: "none", color: "white" }}
         href={`../nike-sneakers/${productId}?title=${title
-          .trim()
-          .replaceAll(" ", "-")}&description=${description
           .trim()
           .replaceAll(" ", "-")}`}
       >

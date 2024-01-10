@@ -31,7 +31,7 @@ export default function Header() {
                   QBOS
                 </Typography>
               </Link>
-              <Link href="sell-your-products">
+              <Link href="../sell-your-products">
                 <Typography
                   sx={{
                     color: "white",

@@ -36,10 +36,7 @@ export default function PopoverCmp({ popup, setPopup, productId, title }) {
     await deleteDataInFirestore(`products/${productId}`);
     setBackdropCmp(false);
     setDialogCmp(false);
-    setSnackbarCmp({
-      shouldShow: true,
-      message: "Product has been deleted. Refresh the page",
-    });
+    setSelectedProductId(productId);
   }
 
   return (

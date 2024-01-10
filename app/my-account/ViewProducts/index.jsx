@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import DisplayProducts from "@/components/DisplayProducts";
 import { getUser } from "@/util";
 import { getAllProducts } from "./util";
+import { useMyAccountContext } from "@/context/myAccount";
 
 export default function ViewProducts() {
   const [loading, setLoading] = useState(true);
@@ -13,6 +14,7 @@ export default function ViewProducts() {
   const [products, setProducts] = useState([]);
 
   const userEmail = useRef("");
+  const { selectedProductId, setSelectedProductId } = useMyAccountContext();
 
   useEffect(() => {
     async function init() {
@@ -25,6 +27,16 @@ export default function ViewProducts() {
     }
     init();
   }, []);
+
+  useEffect(() => {
+    if (selectedProductId.length > 0) {
+      const filteredProducts = products.filter(
+        (product) => product.productId != selectedProductId
+      );
+      setProducts(filteredProducts);
+      setSelectedProductId("");
+    }
+  }, [selectedProductId]);
 
   async function getNext12Products() {
     const top12Products = await getAllProducts(
@@ -39,6 +51,8 @@ export default function ViewProducts() {
     <>
       {loading ? (
         <Typography>Loading...</Typography>
+      ) : products.length == 0 ? (
+        <Typography>You have not created any products</Typography>
       ) : (
         <InfiniteScroll
           dataLength={products.length}

@@ -6,17 +6,17 @@ import Contact from "./Contact";
 import ImageGalleryCmp from "./ImageGalleryCmp";
 import Specification from "./Specification";
 
-export async function generateMetadata({ params, searchParams }) {
+export async function generateMetadata({ params }) {
   const details = await getFromFirestore(`products/${params.productId}`);
   const creatorOfProduct = await getFromFirestore(
     `profiles/${details.creatorOfProduct}`
   );
   const productDetails = { ...details, creatorOfProduct };
-  // const { title, description } = searchParams;
+
   const parsedTitle =
     productDetails.title.replaceAll("-", " ") +
     " | " +
-    "Quickly buy or sell your Nike shoes";
+    "Quickly buy or sell your Nike shoes today!";
   const parsedDescription = productDetails.description.replaceAll("-", " ");
 
   return {
@@ -51,6 +51,8 @@ export default async function NikeSneakerDetails({ params }) {
             title={productDetails.title}
             amount={productDetails.amount}
             creatorOfProduct={productDetails.creatorOfProduct}
+            productId={productDetails.productId}
+            productStatus={productDetails.productStatus}
           />
         </Grid>
       </Grid>

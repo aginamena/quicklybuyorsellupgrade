@@ -19,7 +19,6 @@ import PopoverCmp from "./PopoverCmp";
 export default function Displaycard({
   image,
   title,
-  description,
   amount,
   productId,
   isPrivate,
@@ -37,8 +36,6 @@ export default function Displaycard({
         isPrivate
           ? ""
           : `../nike-sneakers/${productId}?title=${title
-              .trim()
-              .replaceAll(" ", "-")}&description=${description
               .trim()
               .replaceAll(" ", "-")}`
       }
@@ -59,7 +56,6 @@ export default function Displaycard({
                   popup={popup}
                   setPopup={() => setPopup(null)}
                   title={title}
-                  description={description}
                 />
               </>
             )

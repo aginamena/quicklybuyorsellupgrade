@@ -8,14 +8,10 @@ export default function DisplayProducts({ products, isPrivate }) {
   return (
     <Grid container spacing={2}>
       {products.map(
-        (
-          { description, amount, title, files, productId, productStatus },
-          index
-        ) => (
+        ({ amount, title, files, productId, productStatus }, index) => (
           <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
             <Displaycard
               productId={productId}
-              description={description}
               amount={amount}
               title={title}
               image={files[0]}

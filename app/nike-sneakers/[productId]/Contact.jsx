@@ -1,7 +1,8 @@
 "use client";
 
+import FacebookIcon from "@mui/icons-material/Facebook";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography, Divider } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
 
@@ -9,7 +10,13 @@ import Link from "next/link";
 
 import { getUser } from "@/util";
 
-export default function Contact({ title, amount, creatorOfProduct }) {
+export default function Contact({
+  title,
+  amount,
+  creatorOfProduct,
+  productId,
+  productStatus,
+}) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
 
   function handleClick() {
@@ -23,6 +30,14 @@ export default function Contact({ title, amount, creatorOfProduct }) {
       `https://wa.me/${creatorOfProduct.phoneNumber}?text=${encodeURIComponent(
         message
       )}`,
+      "_blank"
+    );
+  }
+  async function shareOnFacebook() {
+    // Open a new window to share the link on Facebook
+    const host = "https://quicklybuyorsellupgrade.vercel.app";
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${host}/nike-sneakers/${productId}?title=${title}`,
       "_blank"
     );
   }
@@ -79,6 +94,26 @@ export default function Contact({ title, amount, creatorOfProduct }) {
           here
         </Link>
       </small>
+      {productStatus === "Published" ? (
+        <>
+          <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
+          <Typography
+            onClick={shareOnFacebook}
+            sx={{
+              cursor: "pointer",
+              display: "flex",
+              marginTop: "20px",
+              alignItems: "center",
+            }}
+          >
+            Share on: <FacebookIcon sx={{ marginLeft: "10px" }} />
+          </Typography>
+        </>
+      ) : (
+        <Typography style={{ marginTop: "20px" }}>
+          Only approved products can be shared.
+        </Typography>
+      )}
     </Paper>
   );
 }

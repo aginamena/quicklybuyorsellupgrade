@@ -73,11 +73,6 @@ export default function SearchBarCmp() {
                                   hit.productId
                                 }?title=${hit.title
                                   .trim()
-                                  .replaceAll(
-                                    " ",
-                                    "-"
-                                  )}&description=${hit.description
-                                  .trim()
                                   .replaceAll(" ", "-")}`}
                                 style={{
                                   color: "white",

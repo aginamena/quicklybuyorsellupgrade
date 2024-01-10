@@ -17,9 +17,9 @@ import {
   where,
 } from "@/config/firebase";
 
-export default function Paginage({ top12Products }) {
+export default function Paginage({ top12Products, hasMoreProducts }) {
   const [products, setProducts] = useState(top12Products);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(hasMoreProducts);
 
   async function getNext12Products() {
     const selectedCategory = "nike-sneakers";
@@ -36,7 +36,7 @@ export default function Paginage({ top12Products }) {
     if (next12Products.length < 13) {
       setHasMore(false);
     }
-    setProducts([...products, ...next12Products.splice(0, 12)]);
+    setProducts([...products, ...next12Products.slice(0, 12)]);
   }
 
   return (

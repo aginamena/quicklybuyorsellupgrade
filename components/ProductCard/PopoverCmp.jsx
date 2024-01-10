@@ -1,9 +1,7 @@
-import FacebookIcon from "@mui/icons-material/Facebook";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import Divider from "@mui/material/Divider";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 
@@ -19,13 +17,7 @@ import BackdropCmp from "../BackdropCmp";
 import DialogCmp from "../DialogCmp";
 import SnackbarCmp from "../SnackbarCmp";
 
-export default function PopoverCmp({
-  popup,
-  setPopup,
-  productId,
-  title,
-  description,
-}) {
+export default function PopoverCmp({ popup, setPopup, productId, title }) {
   const { setTabPosition, setSelectedProductId } = useMyAccountContext();
   const [dialogCmp, setDialogCmp] = useState(false);
   const [backdropCmp, setBackdropCmp] = useState(false);
@@ -50,15 +42,6 @@ export default function PopoverCmp({
     });
   }
 
-  async function shareOnFacebook() {
-    // Open a new window to share the link on Facebook
-    const host = "https://quicklybuyorsellupgrade.vercel.app";
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${host}/nike-sneakers/${productId}?title=${title}&description=${description}`,
-      "_blank"
-    );
-  }
-
   return (
     <Popover
       open={Boolean(popup)}
@@ -72,8 +55,6 @@ export default function PopoverCmp({
       <Link
         style={{ textDecoration: "none", color: "white" }}
         href={`../nike-sneakers/${productId}?title=${title
-          .trim()
-          .replaceAll(" ", "-")}&description=${description
           .trim()
           .replaceAll(" ", "-")}`}
       >
@@ -90,27 +71,6 @@ export default function PopoverCmp({
       >
         Edit product
       </Typography>
-      <Divider
-        sx={{
-          borderBottomWidth: "5px",
-        }}
-      />
-      <Typography
-        onClick={shareOnFacebook}
-        sx={{
-          p: 2,
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        Share on: <FacebookIcon sx={{ marginLeft: "10px" }} />
-      </Typography>
-      <Divider
-        sx={{
-          borderBottomWidth: "5px",
-        }}
-      />
       <Typography
         onClick={() => setDialogCmp(true)}
         sx={{

@@ -15,9 +15,14 @@ export default async function NikeSneakers() {
     where("category", "==", "nike-sneakers"),
     where("productStatus", "==", "Published"),
     orderBy("productId", "desc"),
-    limit(12)
+    limit(13)
   );
 
   const top12Products = await executeQueryOnProductsCollection(q);
-  return <Paginage top12Products={top12Products} />;
+  return (
+    <Paginage
+      top12Products={top12Products.slice(0, 12)}
+      hasMoreProducts={top12Products.length > 12}
+    />
+  );
 }

@@ -30,5 +30,5 @@ export async function getAllProducts(email, productId, setHasMore) {
     setHasMore(false);
     return products;
   }
-  return products.splice(0, 12);
+  return products.slice(0, 12);
 }

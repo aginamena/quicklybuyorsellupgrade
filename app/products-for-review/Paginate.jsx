@@ -17,9 +17,9 @@ import {
   where,
 } from "@/config/firebase";
 
-export default function Paginage({ top12ProductsOnReview }) {
+export default function Paginage({ top12ProductsOnReview, hasMoreProducts }) {
   const [products, setProducts] = useState(top12ProductsOnReview);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(hasMoreProducts);
 
   async function getNext12Products() {
     const q = query(
@@ -35,7 +35,7 @@ export default function Paginage({ top12ProductsOnReview }) {
     if (next12ProductsOnReview.length < 13) {
       setHasMore(false);
     }
-    setProducts([...products, ...next12ProductsOnReview.splice(0, 12)]);
+    setProducts([...products, ...next12ProductsOnReview.slice(0, 12)]);
   }
 
   return (

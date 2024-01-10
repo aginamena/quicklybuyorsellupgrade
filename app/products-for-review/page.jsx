@@ -15,9 +15,14 @@ export default async function ProductsForReview() {
     where("category", "==", "nike-sneakers"),
     where("productStatus", "==", "On review"),
     orderBy("productId", "desc"),
-    limit(12)
+    limit(13)
   );
 
   const top12ProductsOnReview = await executeQueryOnProductsCollection(q);
-  return <Paginage top12ProductsOnReview={top12ProductsOnReview} />;
+  return (
+    <Paginage
+      top12ProductsOnReview={top12ProductsOnReview.slice(0, 12)}
+      hasMoreProducts={top12ProductsOnReview.length > 12}
+    />
+  );
 }

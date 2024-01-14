@@ -7,7 +7,6 @@ import DisplayProducts from "@/components/DisplayProducts";
 import { getUser } from "@/util";
 import { getAllProducts } from "./util";
 import { useMyAccountContext } from "@/context/myAccount";
-import Link from "next/link";
 
 export default function ViewProducts() {
   const [loading, setLoading] = useState(true);
@@ -55,17 +54,14 @@ export default function ViewProducts() {
       ) : products.length == 0 ? (
         <Typography>You have not created any products</Typography>
       ) : (
-        <>
-          <InfiniteScroll
-            dataLength={products.length}
-            next={getNext12Products}
-            hasMore={hasMore}
-            loader={<Typography>Loading...</Typography>}
-          >
-            <DisplayProducts products={products} isPrivate={true} />
-          </InfiniteScroll>
-          <Link href="products-for-review">testing</Link>
-        </>
+        <InfiniteScroll
+          dataLength={products.length}
+          next={getNext12Products}
+          hasMore={hasMore}
+          loader={<Typography>Loading...</Typography>}
+        >
+          <DisplayProducts products={products} isPrivate={true} />
+        </InfiniteScroll>
       )}
     </>
   );

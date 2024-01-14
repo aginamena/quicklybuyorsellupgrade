@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { auth, provider, signInWithPopup } from "@/config/firebase";
-import { getUser, storeDataInFirestore } from "@/util";
+import { getUser, isUserAdmin, storeDataInFirestore } from "@/util";
 import PhoneNumber from "./PhoneNumber";
 
 export default function Auth() {
@@ -97,6 +97,17 @@ export default function Auth() {
                     My Account
                   </Link>
                 </MenuItem>
+                {isUserAdmin() && (
+                  <MenuItem>
+                    <Link
+                      href="../products-for-review"
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      Products for review
+                    </Link>
+                  </MenuItem>
+                )}
+
                 <MenuItem onClick={logout}>Log Out</MenuItem>
               </Menu>
             </div>

@@ -14,6 +14,7 @@ import red from "@mui/material/colors/red";
 import CardCmp from "@/components/CardCmp";
 import Footer from "@/components/Footer";
 import ValuePosition from "@/components/ValueProposition";
+import HowItWorks from "@/components/HowItWorks";
 
 export default function SellYourProducts() {
   const cards = [
@@ -28,11 +29,6 @@ export default function SellYourProducts() {
       imagePath: "sellYourProducts/reach_wider_audience.png",
       description:
         "Tap into our extensive customer base as well as other audiences on social media platforms.",
-    },
-    {
-      title: "Instant Communication",
-      imagePath: "sellYourProducts/communicate_with_customer.jpg",
-      description: "Use whatsapp to communicate directly with your customer.",
     },
     {
       title: "Secure payment transaction flow",
@@ -63,10 +59,32 @@ export default function SellYourProducts() {
     },
   ];
 
+  const howItWorks = [
+    {
+      title: "Sign into QBOS with your email and phone number.",
+      imagePath: "sellYourProducts/sign_in.jpg",
+    },
+    {
+      title: "Select 'My Account' in your profile.",
+      imagePath: "sellYourProducts/my_account.jpg",
+    },
+
+    {
+      title:
+        "Fill out the form with essential details such as image, price, description and so on.",
+      imagePath: "sellYourProducts/nike_for_sale.jpg",
+    },
+    {
+      title:
+        "Click the 'Create Product' button. We'll review and approve your post or contact you for additional product details.",
+      imagePath: "sellYourProducts/confirmation_message.jpg",
+    },
+  ];
+
   return (
     <>
       <Container>
-        <ValuePosition proposition="Sell you Nike shoes today!" />
+        <ValuePosition proposition="Sell your Nike shoes today!" />
 
         <Box style={{ textAlign: "center", color: "#dedede" }}>
           <Box style={{ fontSize: "19px" }}>
@@ -126,6 +144,7 @@ export default function SellYourProducts() {
           <Typography variant="h5">Sell you Nike shoes today!</Typography>
         </Box>
         <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
+        <HowItWorks cards={howItWorks} />
         <Typography
           variant="h6"
           style={{

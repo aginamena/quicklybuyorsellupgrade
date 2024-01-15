@@ -4,12 +4,32 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
 import Footer from "@/components/Footer";
-import HowItWorks from "./HowItWorks";
+import HowItWorks from "@/components/HowItWorks";
+import ValuePosition from "@/components/ValueProposition";
 import ReveiwsAndRatings from "./ReviewAndRatings";
 import TodaysProducts from "./TodaysProducts";
-import ValuePosition from "@/components/ValueProposition";
 
 export default function Home() {
+  const cards = [
+    {
+      title: "Explore a wide selection of verified products carefully curated.",
+      imagePath: "root/view_wide_selection_of_products.jpg",
+    },
+    {
+      title: "Select the product that suits you best and place your order.",
+      imagePath: "root/place_your_order.jpg",
+    },
+    {
+      title:
+        "Once your order has been placed, We will contact you with your Order ID for you to track your delivery.",
+      imagePath: "root/track_order.jpg",
+    },
+    {
+      title:
+        "After you have received your order, give us feedback on our service to help us improve.",
+      imagePath: "root/received_order_package.jpg",
+    },
+  ];
   return (
     <>
       <Container>
@@ -35,7 +55,7 @@ export default function Home() {
           </Typography>
         </Box>
         <TodaysProducts />
-        <HowItWorks />
+        <HowItWorks cards={cards} />
         <ReveiwsAndRatings />
       </Container>
       <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />

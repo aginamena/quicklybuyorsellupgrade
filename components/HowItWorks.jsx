@@ -6,27 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import CardCmp from "@/components/CardCmp";
 
-export default function HowItWorks() {
-  const cards = [
-    {
-      title: "Explore a wide selection of verified products carefully curated.",
-      imagePath: "root/view_wide_selection_of_products.jpg",
-    },
-    {
-      title: "Select the product that suits you best and place your order.",
-      imagePath: "root/place_your_order.jpg",
-    },
-    {
-      title:
-        "Once your order has been placed, We will contact you with your Order ID for you to track your delivery.",
-      imagePath: "root/track_order.jpg",
-    },
-    {
-      title:
-        "After you have received your order, give us feedback on our service to help us improve.",
-      imagePath: "root/received_order_package.jpg",
-    },
-  ];
+export default function HowItWorks({ cards }) {
   return (
     <>
       <Typography

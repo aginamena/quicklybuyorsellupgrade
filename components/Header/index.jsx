@@ -39,7 +39,7 @@ export default function Header() {
                     display: { xs: "none", sm: "block" },
                   }}
                 >
-                  Sell your products
+                  Sell your Nike shoes today!
                 </Typography>
               </Link>
             </Box>

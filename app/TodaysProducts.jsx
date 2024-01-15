@@ -34,7 +34,7 @@ export default async function TodaysProducts() {
         variant="h6"
         style={{ textAlign: "center", marginBottom: "30px" }}
       >
-        Todays products
+        Todays top products
       </Typography>
       <DisplayProducts products={last8Products} isPrivate={false} />
       <Box style={{ textAlign: "center", marginTop: "30px" }}>

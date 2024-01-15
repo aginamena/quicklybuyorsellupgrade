@@ -9,23 +9,22 @@ import CardCmp from "@/components/CardCmp";
 export default function HowItWorks() {
   const cards = [
     {
-      title:
-        "Explore a wide selection of verified products that meet your needs.",
+      title: "Explore a wide selection of verified products carefully curated.",
       imagePath: "root/view_wide_selection_of_products.jpg",
     },
     {
-      title: "Contact the seller through direct messaging.",
-      imagePath: "root/send_a_message_to_the_seller.jpg",
+      title: "Select the product that suits you best and place your order.",
+      imagePath: "root/place_your_order.jpg",
     },
     {
       title:
-        "Arrange a meeting with the seller to inspect the product in person.",
-      imagePath: "root/inspect_the_product_in_person.jpg",
+        "Once your order has been placed, We will contact you with your Order ID for you to track your delivery.",
+      imagePath: "root/track_order.jpg",
     },
     {
       title:
-        "Pay the seller through the site once you've confirmed that the product meets your expectations.",
-      imagePath: "root/pay_for_the_product.jpg",
+        "After you have received your order, give us feedback on our service to help us improve.",
+      imagePath: "root/received_order_package.jpg",
     },
   ];
   return (

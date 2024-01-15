@@ -19,6 +19,7 @@ export default function ValuePosition({ proposition }) {
         alignItems: "center",
         justifyContent: "space-evenly",
         flexDirection: { xs: "column-reverse", md: "row" },
+        marginBottom: { xs: "30px", md: "0" },
       }}
     >
       <Box sx={{ textAlign: "center" }}>

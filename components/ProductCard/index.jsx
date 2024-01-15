@@ -68,15 +68,6 @@ export default function Displaycard({
           style={{ height: 150 }}
         />
         <CardContent>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ fontSize: "16px", wordWrap: "break-word" }}
-          >
-            {title.length > maximumLengthOfTitle
-              ? title.substring(0, maximumLengthOfTitle) + "..."
-              : title}
-          </Typography>
           <Typography variant="h6" component="div">
             {formattedAmount.length > maximumLengthOfAmount
               ? formattedAmount.substring(0, maximumLengthOfAmount) + "..."

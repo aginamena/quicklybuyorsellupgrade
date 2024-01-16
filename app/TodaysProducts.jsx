@@ -23,7 +23,7 @@ export default async function TodaysProducts() {
     collection(firestore, "products"),
     where("productStatus", "==", "Published"),
     orderBy("productId", "desc"),
-    limit(8)
+    limit(12)
   );
   const last8Products = await executeQueryOnProductsCollection(q);
 

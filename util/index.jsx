@@ -1,20 +1,14 @@
 import {
   auth,
-  collection,
   deleteDoc,
   doc,
   firestore,
   getDoc,
   getDocs,
-  limit,
-  orderBy,
   provider,
-  query,
   setDoc,
   signInWithPopup,
-  startAfter,
   updateDoc,
-  where,
 } from "@/config/firebase";
 
 export async function getFromFirestore(path) {

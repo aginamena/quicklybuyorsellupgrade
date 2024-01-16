@@ -2,7 +2,7 @@
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import { Box, Paper, Typography, Divider } from "@mui/material";
+import { Box, Paper, Typography, Divider, Button } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
 
@@ -21,17 +21,6 @@ export default function Contact({
 
   function handleClick() {
     const currentUser = getUser();
-    if (!currentUser) {
-      alert("To contact the seller, please sign in to your account.");
-      return;
-    }
-    const message = "Hello, I'm interested in your products!";
-    window.open(
-      `https://wa.me/${creatorOfProduct.phoneNumber}?text=${encodeURIComponent(
-        message
-      )}`,
-      "_blank"
-    );
   }
   async function shareOnFacebook() {
     // Open a new window to share the link on Facebook
@@ -63,40 +52,21 @@ export default function Contact({
       <Typography
         style={{ color: "#dedede", marginBottom: "15px", textAlign: "center" }}
       >
-        Contact {creatorOfProduct.displayName}
+        Currently in stock
       </Typography>
-      <Box
+      <Button
         onClick={handleClick}
+        variant="outlined"
+        size="large"
         style={{
-          display: "flex",
-          alignItems: "center",
-          color: "#25d366",
-          border: "1px solid #25d366",
-          paddingTop: "10px",
-          paddingBottom: "10px",
-          borderRadius: "50px",
-          justifyContent: "center",
-          textDecoration: "none",
-          cursor: "pointer",
+          width: "100%",
+          height: "50px",
         }}
       >
-        <Typography variant="h6" style={{ marginRight: "10px" }}>
-          WhatsApp
-        </Typography>
-        <WhatsAppIcon />
-      </Box>
-      <small>
-        Do not have whatsapp? download it{" "}
-        <Link
-          href="https://www.whatsapp.com/download"
-          style={{ color: "white" }}
-        >
-          here
-        </Link>
-      </small>
+        Place your order
+      </Button>
       {productStatus === "Published" ? (
         <>
-          <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
           <Typography
             onClick={shareOnFacebook}
             sx={{

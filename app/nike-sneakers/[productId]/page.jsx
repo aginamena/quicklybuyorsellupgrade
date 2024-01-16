@@ -5,6 +5,7 @@ import AdminPanel from "./AdminPanel";
 import Contact from "./Contact";
 import ImageGalleryCmp from "./ImageGalleryCmp";
 import Specification from "./Specification";
+import SimilarProducts from "./SimilarProducts";
 
 export async function generateMetadata({ params }) {
   const details = await getFromFirestore(`products/${params.productId}`);
@@ -63,6 +64,7 @@ export default async function NikeSneakerDetails({ params }) {
         description={productDetails.description}
       />
       <AdminPanel productId={params.productId} />
+      <SimilarProducts amount={productDetails.amount} />
     </Container>
   );
 }

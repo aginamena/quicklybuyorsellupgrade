@@ -1,14 +1,13 @@
 "use client";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import { Box, Paper, Typography, Divider, Button } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
 
-import Link from "next/link";
-
 import { getUser } from "@/util";
+import { useState } from "react";
+import DeliveryAddress from "./DeliveryAddress";
 
 export default function Contact({
   title,
@@ -17,10 +16,16 @@ export default function Contact({
   productId,
   productStatus,
 }) {
+  const [open, setOpen] = useState(false);
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
 
   function handleClick() {
     const currentUser = getUser();
+    if (!currentUser) {
+      alert("You have to sign in to place your order");
+      return;
+    }
+    setOpen(true);
   }
   async function shareOnFacebook() {
     // Open a new window to share the link on Facebook
@@ -84,6 +89,7 @@ export default function Contact({
           Only approved products can be shared.
         </Typography>
       )}
+      <DeliveryAddress open={open} setOpen={setOpen} />
     </Paper>
   );
 }

@@ -51,7 +51,6 @@ export default async function NikeSneakerDetails({ params }) {
           <Contact
             title={productDetails.title}
             amount={productDetails.amount}
-            creatorOfProduct={productDetails.creatorOfProduct}
             productId={productDetails.productId}
             productStatus={productDetails.productStatus}
           />

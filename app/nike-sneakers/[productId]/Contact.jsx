@@ -1,78 +1,12 @@
-"use client";
-
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
 
-import { useState } from "react";
-import { usePaystackPayment } from "react-paystack";
+import Link from "next/link";
 
-import { getUser } from "@/util";
-
-export default function Contact({ title, amount, productId, productStatus }) {
-  const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [deliveryAddressIsSaved, setDeliveryAddressIsSaved] = useState(false);
+export default function Contact({ title, amount }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
-
-  const config = {
-    reference: new Date().getTime().toString(),
-    email: "aginamena5@gmail.com",
-    amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-    publicKey: "pk_test_ae8b2782baa39db6d7f2f248504cc933e334dabc",
-  };
-
-  // you can call this function anything
-  const onSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
-  };
-
-  // you can call this function anything
-  const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
-  };
-
-  const startPaymentTransacton = usePaystackPayment(config);
-
-  function saveDeliveryAddress() {
-    if (deliveryAddress.length == 0) {
-      alert("Enter your delivery address");
-      return;
-    }
-    setDeliveryAddressIsSaved(true);
-  }
-
-  function placeOrder() {
-    const currentUser = getUser();
-    if (!deliveryAddressIsSaved) {
-      alert("Save your delivery address");
-      return;
-    }
-    if (!currentUser) {
-      alert("You have to sign in to place your order");
-      return;
-    }
-    startPaymentTransacton(onSuccess, onClose);
-  }
-
-  function shareOnFacebook() {
-    // Open a new window to share the link on Facebook
-    const host = "https://quicklybuyorsellupgrade.vercel.app";
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${host}/nike-sneakers/${productId}?title=${title}`,
-      "_blank"
-    );
-  }
 
   return (
     <>
@@ -93,61 +27,23 @@ export default function Contact({ title, amount, productId, productStatus }) {
         >
           {formattedAmount}
         </Typography>
-        <TextField
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={3}
-          onChange={(e) => setDeliveryAddress(e.target.value)}
-          placeholder="Enter your delivery address..."
-        />
+        <Typography>
+          Contact <b>Mena Agina</b> or <b>Josephine Obani</b> on our facebook
+          group to place your order for this product
+        </Typography>
         <Box
-          style={{
-            display: "flex",
-            marginTop: "10px",
-            marginBottom: "10px",
-            justifyContent: "center",
-          }}
+          style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
         >
-          {deliveryAddressIsSaved ? (
-            <CheckCircleIcon fontSize="large" color="green" />
-          ) : (
-            <Button onClick={saveDeliveryAddress} variant="outlined">
-              Save
-            </Button>
-          )}
-        </Box>
-        <Divider sx={{ borderBottomWidth: "5px", marginBottom: "20px" }} />
-        <Button
-          onClick={placeOrder}
-          variant="contained"
-          size="large"
-          style={{
-            width: "100%",
-            height: "50px",
-          }}
-        >
-          Place your order
-        </Button>
-        {productStatus === "Published" ? (
-          <>
-            <Typography
-              onClick={shareOnFacebook}
-              sx={{
-                cursor: "pointer",
-                display: "flex",
-                marginTop: "20px",
-                alignItems: "center",
-              }}
-            >
-              Share on: <FacebookIcon sx={{ marginLeft: "10px" }} />
-            </Typography>
-          </>
-        ) : (
-          <Typography style={{ marginTop: "20px" }}>
-            Only approved products can be shared.
+          <Typography style={{ marginRight: "10px" }}>
+            Visit our page{" "}
           </Typography>
-        )}
+          <Link
+            href="https://www.facebook.com/groups/1057599295547802"
+            style={{ color: "white" }}
+          >
+            <FacebookIcon />
+          </Link>
+        </Box>
       </Paper>
       <Paper style={{ marginTop: "30px", padding: "30px", color: "#dedede" }}>
         <Typography>Once your order has been placed,</Typography>

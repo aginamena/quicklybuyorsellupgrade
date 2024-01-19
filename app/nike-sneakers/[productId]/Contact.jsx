@@ -1,3 +1,4 @@
+"use client";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Box, Paper, Typography } from "@mui/material";
 

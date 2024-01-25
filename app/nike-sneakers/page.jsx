@@ -9,6 +9,9 @@ import {
 import { executeQueryOnProductsCollection } from "@/util";
 import Paginage from "./Paginate";
 
+//refetching the data every 5minutes (60 * 5 = 300)
+export const revalidate = 300;
+
 export default async function NikeSneakers() {
   const q = query(
     collection(firestore, "products"),

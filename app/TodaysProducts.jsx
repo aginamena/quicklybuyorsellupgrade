@@ -18,6 +18,9 @@ import Link from "next/link";
 import DisplayProducts from "@/components/DisplayProducts";
 import { executeQueryOnProductsCollection } from "@/util";
 
+//refetching the data every 5minutes (60 * 5 = 300)
+export const revalidate = 300;
+
 export default async function TodaysProducts() {
   const q = query(
     collection(firestore, "products"),

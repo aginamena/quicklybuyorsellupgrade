@@ -24,7 +24,7 @@ export default function Home() {
     },
     {
       title:
-        "Once your order has been placed, We will contact you with your Order ID for you to track your delivery.",
+        "Once your order has been placed, We will send you your Order ID for you to track your delivery.",
       imagePath: "root/track_order.jpg",
     },
     {

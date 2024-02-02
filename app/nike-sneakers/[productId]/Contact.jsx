@@ -29,14 +29,13 @@ export default function Contact({ title, amount }) {
           {formattedAmount}
         </Typography>
         <Typography>
-          Contact <b>Mena Agina</b> or <b>Josephine Obani</b> on our facebook
-          group to place your order for this product
+          To place your order, contact <b>Mena Agina</b> on our facebook group.
         </Typography>
         <Box
           style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
         >
           <Typography style={{ marginRight: "10px" }}>
-            Visit our page{" "}
+            Go to our facebook group{" "}
           </Typography>
           <Link
             href="https://www.facebook.com/groups/1057599295547802"
@@ -49,7 +48,7 @@ export default function Contact({ title, amount }) {
       <Paper style={{ marginTop: "30px", padding: "30px", color: "#dedede" }}>
         <Typography>Once your order has been placed,</Typography>
         <Typography style={{ marginTop: "10px" }}>
-          We will send a payment confirmation to your email
+          We will send a payment confirmation
         </Typography>
         <Typography style={{ marginTop: "10px" }}>
           We will contact you with your order Id so you can track the movement

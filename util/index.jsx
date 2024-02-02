@@ -23,11 +23,7 @@ export async function getFromFirestore(path) {
 
 export function isUserAdmin() {
   const currentUser = getUser();
-  return (
-    currentUser &&
-    (currentUser.email === process.env.NEXT_PUBLIC_ADMIN ||
-      currentUser.email === process.env.NEXT_PUBLIC_ADMIN2)
-  );
+  return currentUser && currentUser.email === process.env.NEXT_PUBLIC_ADMIN;
 }
 
 export async function executeQueryOnProductsCollection(query) {

@@ -9,6 +9,9 @@ import ValuePosition from "@/components/ValueProposition";
 import ReveiwsAndRatings from "./ReviewAndRatings";
 import TodaysProducts from "./TodaysProducts";
 
+//refetching the data every 5minutes (60 * 5 = 300)
+export const revalidate = 300;
+
 export default function Home() {
   const cards = [
     {

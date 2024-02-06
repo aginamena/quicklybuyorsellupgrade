@@ -29,21 +29,20 @@ export default function Contact({ title, amount }) {
           {formattedAmount}
         </Typography>
         <Typography>
-          To place your order, contact <b>Mena Agina</b> on our facebook group.
+          To place your order, contact <b>Mena Agina</b> on facebook .
         </Typography>
         <Box
           style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
         >
-          <Typography style={{ marginRight: "10px" }}>
-            Go to our facebook group{" "}
-          </Typography>
-          <Link
-            href="https://www.facebook.com/groups/1057599295547802"
-            style={{ color: "white" }}
-          >
-            <FacebookIcon />
-          </Link>
+          <Typography style={{ marginRight: "10px" }}></Typography>
         </Box>
+
+        <Link
+          href="https://www.facebook.com/messages/t/mena.agina.75"
+          style={{ color: "white" }}
+        >
+          Message Mena here
+        </Link>
       </Paper>
       <Paper style={{ marginTop: "30px", padding: "30px", color: "#dedede" }}>
         <Typography>Once your order has been placed,</Typography>

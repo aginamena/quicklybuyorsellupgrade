@@ -1,5 +1,4 @@
 "use client";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import { Box, Paper, Typography } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
@@ -40,6 +39,7 @@ export default function Contact({ title, amount }) {
         <Link
           href="https://www.facebook.com/messages/t/mena.agina.75"
           style={{ color: "white" }}
+          onClick={() => fbq.event("clicked-on-Menas-name")}
         >
           Message Mena here
         </Link>

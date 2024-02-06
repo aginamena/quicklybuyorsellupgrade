@@ -11,6 +11,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import FacebookPixel from "@/components/FacebookPixel";
 
 export const metadata = {
   title: "Quickly buy or sell your Nike shoes today!",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       <Analytics />
       <SpeedInsights />
       <GoogleAnalytics gaId="G-PDRSJTYRSL" />
+      <FacebookPixel />
     </html>
   );
 }

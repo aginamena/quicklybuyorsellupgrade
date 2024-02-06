@@ -27,11 +27,11 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
         </ThemeRegistry>
+        <Analytics />
+        <SpeedInsights />
+        <GoogleAnalytics gaId="G-PDRSJTYRSL" />
+        <FacebookPixel />
       </body>
-      <Analytics />
-      <SpeedInsights />
-      <GoogleAnalytics gaId="G-PDRSJTYRSL" />
-      <FacebookPixel />
     </html>
   );
 }

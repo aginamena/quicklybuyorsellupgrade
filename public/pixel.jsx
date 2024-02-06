@@ -22,4 +22,5 @@ initializeFacebookPixel(
   "https://connect.facebook.net/en_US/fbevents.js"
 );
 
-window.fbq("init", process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID);
+const facebook_pixel_id = "910411337414685";
+window.fbq("init", facebook_pixel_id);

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const FacebookPixel = () => {
   const [loaded, setLoaded] = useState(false);
   const pathname = usePathname();
+  const facebook_pixel_id = "910411337414685";
 
   useEffect(() => {
     if (!loaded) return;
@@ -21,7 +22,7 @@ const FacebookPixel = () => {
         src="/pixel.jsx"
         strategy="afterInteractive"
         onLoad={() => setLoaded(true)}
-        data-pixel-id={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}
+        data-pixel-id={facebook_pixel_id}
       />
     </div>
   );

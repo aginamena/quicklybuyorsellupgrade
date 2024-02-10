@@ -5,7 +5,6 @@ import { Box, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Specification({
-  type,
   description,
   productId,
   productStatus,
@@ -19,17 +18,6 @@ export default function Specification({
   return (
     <Paper style={{ padding: "30px", marginTop: "40px" }}>
       <Box style={{ marginBottom: "40px" }}>
-        <Typography
-          style={{
-            marginBottom: "10px",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <b>Type </b>
-          <span style={{ margin: "0 5px" }}>:</span>
-          <span style={{ color: "#dedede" }}>{type}</span>
-        </Typography>
         {isAdmin && (
           <>
             <Typography

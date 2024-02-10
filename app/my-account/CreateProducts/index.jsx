@@ -125,19 +125,6 @@ export default function CreateProducts() {
       <Typography style={{ marginBottom: "20px" }}>Product category</Typography>
       <Box style={{ marginTop: "20px" }}>
         <SelectCmp
-          name="Type"
-          previousSelectedValue={specification.type}
-          menuItems={["Male", "Female", "Unisex"]}
-          handleSelect={(value) =>
-            setSpecification({
-              ...specification,
-              type: value,
-            })
-          }
-        />
-      </Box>
-      <Box style={{ marginTop: "20px" }}>
-        <SelectCmp
           name="Condition"
           menuItems={["New", "Used"]}
           previousSelectedValue={specification.condition}

@@ -69,6 +69,7 @@ export default function SearchBarCmp() {
                           >
                             <CardContent sx={{ flex: "1 0 auto" }}>
                               <Link
+                                onClick={() => setOpenSearchBar(false)}
                                 href={`../nike-sneakers/${
                                   hit.productId
                                 }?title=${hit.title

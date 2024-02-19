@@ -8,7 +8,8 @@ import HowItWorks from "@/components/HowItWorks";
 import ValuePosition from "@/components/ValueProposition";
 import ReveiwsAndRatings from "./ReviewAndRatings";
 import TodaysProducts from "./TodaysProducts";
-
+import Image from "next/image";
+import { Paper } from "@mui/material";
 //refetching the data every 5minutes (60 * 5 = 300)
 export const revalidate = 300;
 
@@ -44,7 +45,7 @@ export default function Home() {
             </>
           }
         />
-        <Box style={{ textAlign: "center", color: "#dedede" }}>
+        {/* <Box style={{ textAlign: "center", color: "#dedede" }}>
           <Box style={{ fontSize: "19px" }}>
             &quot;Since day one, our mission has been to provide you with fast
             and secure access to the Nike shoes you desire. <br /> Every product
@@ -56,7 +57,21 @@ export default function Home() {
           <Typography style={{ marginTop: "20px" }}>
             Mena Agina - Founder & CEO
           </Typography>
-        </Box>
+        </Box> */}
+        <NikeTypes imageSrc="/root/sporting_shoe.png" type="Sporting shoes" />
+        <NikeTypes imageSrc="/root/tets.jpg" type="Lifestyle shoes" />
+        <Image
+          src="/root/sporting_shoe.png"
+          width={300}
+          height={300}
+          alt="Picture of the author"
+        />
+        <Image
+          src="/root/sporting_shoe.png"
+          width={300}
+          height={300}
+          alt="Picture of the author"
+        />
         <TodaysProducts />
         <HowItWorks cards={cards} />
         <ReveiwsAndRatings />
@@ -65,5 +80,29 @@ export default function Home() {
       <Footer />
     </>
   );
-  z;
+}
+
+function NikeTypes({ imageSrc, type }) {
+  return (
+    <div
+      style={{
+        width: "300px",
+        height: "300px",
+        borderRadius: "100px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Image
+        src={imageSrc}
+        width={200}
+        height={200}
+        alt={type}
+        style={{ borderRadius: "50px" }}
+      />
+      <Typography style={{ fontSize: "20px" }}>{type}</Typography>
+    </div>
+  );
 }

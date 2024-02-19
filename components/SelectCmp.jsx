@@ -1,48 +1,31 @@
-import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import Select from "@mui/material/Select";
-import PropTypes from "prop-types";
-import { useState } from "react";
 
-export default function SelectCmp({
-  name,
-  menuItems,
-  handleSelect,
-  previousSelectedValue = "",
-}) {
-  const [state, setState] = useState(previousSelectedValue);
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-  const handleChange = (event) => {
-    setState(event.target.value);
-    handleSelect(event.target.value);
-  };
-
+export default function SelectCmp(props) {
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel data-testid="inputLabel">{name}</InputLabel>
-        <Select
-          value={state}
-          label={name}
-          data-testid={name}
-          required
-          onChange={handleChange}
-        >
-          {menuItems.map((menuItem, index) => (
-            <MenuItem key={index} value={menuItem}>
-              {menuItem}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+    <FormControl fullWidth required>
+      <InputLabel>{props.name}</InputLabel>
+      <Select
+        required
+        {...props}
+        input={<OutlinedInput label={props.name} />}
+        MenuProps={MenuProps}
+      >
+        {props.children}
+      </Select>
+    </FormControl>
   );
 }
-
-SelectCmp.propTypes = {
-  name: PropTypes.string.isRequired,
-  menuItems: PropTypes.array.isRequired,
-  handleSelect: PropTypes.func.isRequired,
-};

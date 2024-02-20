@@ -51,6 +51,7 @@ export default async function NikeSneakerDetails({ params }) {
           <Contact
             title={productDetails.title}
             amount={productDetails.amount}
+            productId={productDetails.productId}
           />
         </Grid>
       </Grid>

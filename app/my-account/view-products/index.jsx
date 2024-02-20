@@ -7,6 +7,7 @@ import DisplayProducts from "@/components/DisplayProducts";
 import { getUser } from "@/util";
 import { getAllProducts } from "./util";
 import { useMyAccountContext } from "@/context/myAccount";
+import { useSearchParams } from "next/navigation";
 
 export default function ViewProducts() {
   const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ export default function ViewProducts() {
   const [products, setProducts] = useState([]);
 
   const userEmail = useRef("");
-  const { selectedProductId, setSelectedProductId } = useMyAccountContext();
+  const searchparams = useSearchParams();
 
   useEffect(() => {
     async function init() {
@@ -26,17 +27,7 @@ export default function ViewProducts() {
       setLoading(false);
     }
     init();
-  }, []);
-
-  useEffect(() => {
-    if (selectedProductId.length > 0) {
-      const filteredProducts = products.filter(
-        (product) => product.productId != selectedProductId
-      );
-      setProducts(filteredProducts);
-      setSelectedProductId("");
-    }
-  }, [selectedProductId]);
+  }, [searchparams]);
 
   async function getNext12Products() {
     const top12Products = await getAllProducts(

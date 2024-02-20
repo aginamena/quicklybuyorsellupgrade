@@ -1,14 +1,11 @@
 "use client";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
+import Link from "next/link";
 
-export default function Contact({ title, amount }) {
+export default function Contact({ title, amount, productId }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
-
-  function goToFacebook() {
-    window.fbq("track", "InitiateCheckout");
-  }
 
   return (
     <>
@@ -42,7 +39,6 @@ export default function Contact({ title, amount }) {
           style={{ color: "white" }}
           target="_blank"
           href="https://www.facebook.com/messages/t/mena.agina.75"
-          onClick={goToFacebook}
         >
           Message Mena here
         </a>
@@ -60,6 +56,15 @@ export default function Contact({ title, amount }) {
           Do not forget to give us review!
         </Typography>
       </Paper>
+      <Link href={`my-account?tab=0&productId=${productId}`}>
+        <Button
+          size="large"
+          variant="outlined"
+          style={{ width: "100%", marginTop: "30px" }}
+        >
+          Post ad like this
+        </Button>
+      </Link>
     </>
   );
 }

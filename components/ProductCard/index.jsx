@@ -24,7 +24,6 @@ export default function Displaycard({
   isPrivate,
   productStatus,
 }) {
-  const maximumLengthOfTitle = 17;
   const maximumLengthOfAmount = 15;
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
   const [popup, setPopup] = useState(null);

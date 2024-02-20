@@ -3,25 +3,29 @@ import { Container, Toolbar, useMediaQuery } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import { useTheme } from "@mui/material/styles";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import CreateProducts from "./CreateProducts";
+import CreateProducts from "./create-products";
 import TabPanel from "./TabPanel";
-import ViewProducts from "./ViewProducts";
+import ViewProducts from "./view-products";
 import { TabCmp } from "./style";
 import { MyAccountContextWrapper } from "@/context/myAccount";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function MyAccount() {
   const theme = useTheme();
   const ismediumScreenSizeAndBelow = useMediaQuery(
     theme.breakpoints.down("md")
   );
+  const searchParams = useSearchParams();
 
   const [tabPosition, setTabPosition] = useState(0);
 
-  const handleChange = (_, newValue) => {
-    setTabPosition(newValue);
-  };
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    setTabPosition(parseInt(tab));
+  }, [searchParams]);
 
   return (
     <MyAccountContextWrapper parentState={{ tabPosition, setTabPosition }}>
@@ -31,11 +35,14 @@ export default function MyAccount() {
           orientation={ismediumScreenSizeAndBelow ? "horizontal" : "vertical"}
           variant={ismediumScreenSizeAndBelow ? "scrollable" : "fullWidth"}
           value={tabPosition}
-          onChange={handleChange}
           allowScrollButtonsMobile
         >
-          <TabCmp label="Create Products" data-testid="Create Products" />
-          <TabCmp label="View Products" data-testid="View Products" />
+          <Link href="my-account?tab=0" style={{ color: "white" }}>
+            <TabCmp label="Create Products" data-testid="Create Products" />
+          </Link>
+          <Link href="my-account?tab=1" style={{ color: "white" }}>
+            <TabCmp label="View Products" data-testid="View Products" />
+          </Link>
         </Tabs>
         <TabPanel value={tabPosition} index={0}>
           <CreateProducts />

@@ -91,7 +91,7 @@ export default function Auth() {
               >
                 <MenuItem data-testid="MyAccount">
                   <Link
-                    href="../my-account"
+                    href="../my-account?tab=0"
                     style={{ color: "white", textDecoration: "none" }}
                   >
                     My Account

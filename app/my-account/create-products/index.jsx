@@ -21,10 +21,10 @@ import Image from "next/image";
 import BackdropCmp from "@/components/BackdropCmp";
 import SelectCmp from "@/components/SelectCmp";
 import SnackbarCmp from "@/components/SnackbarCmp";
-import { useMyAccountContext } from "@/context/myAccount";
 import { getFromFirestore } from "@/util";
 import { PostImage } from "./style";
 import { createProduct } from "./util";
+import { useSearchParams } from "next/navigation";
 
 export default function CreateProducts() {
   const [specification, setSpecification] = useState({
@@ -38,9 +38,9 @@ export default function CreateProducts() {
     message: "",
   });
   const [backdropCmp, setBackdropCmp] = useState(false);
-  const { selectedProductId, setSelectedProductId } = useMyAccountContext();
 
   const theme = useTheme();
+  const searchParams = useSearchParams();
 
   const isMediumScreenSizeAndBelow = useMediaQuery(
     theme.breakpoints.down("md")
@@ -85,7 +85,6 @@ export default function CreateProducts() {
     }
 
     try {
-      console.log(specification);
       setBackdropCmp(true);
       // if we're editing the product, we need to keep the current product id
       await createProduct(specification);
@@ -114,19 +113,18 @@ export default function CreateProducts() {
   }
 
   useEffect(() => {
-    if (selectedProductId.length > 0) {
-      async function loadProduct() {
+    const productId = searchParams.get("productId");
+    async function init() {
+      if (productId) {
         setLoading(true);
-        const product = await getFromFirestore(`products/${selectedProductId}`);
+        const product = await getFromFirestore(`products/${productId}`);
         setIsEditingProduct(true);
         setSpecification({ ...product, originalFiles: product.files });
         setLoading(false);
-        setSelectedProductId("");
       }
-      loadProduct();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedProductId]);
+    init();
+  }, []);
 
   if (loading) {
     return <Typography>Loading...</Typography>;
@@ -135,7 +133,7 @@ export default function CreateProducts() {
     <form data-testid="Create Products Cmp" onSubmit={handleSubmit}>
       {isEditingProduct && (
         <Typography variant="h6" style={{ textAlign: "center" }}>
-          You are currently editing your product
+          You are currently editing this product
         </Typography>
       )}
       <Box style={{ marginBottom: "30px" }}>

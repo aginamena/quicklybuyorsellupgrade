@@ -29,7 +29,7 @@ import { createProduct } from "./util";
 export default function CreateProducts() {
   const [specification, setSpecification] = useState({
     files: [],
-    shoeSizes: [],
+    sizes: [],
   });
   const [loading, setLoading] = useState(false);
   const [isEditingProduct, setIsEditingProduct] = useState(false);
@@ -109,7 +109,7 @@ export default function CreateProducts() {
     const value = event.target.value;
     setSpecification((prevState) => ({
       ...prevState,
-      shoeSizes: typeof value === "string" ? value.split(",") : value,
+      sizes: typeof value === "string" ? value.split(",") : value,
     }));
   }
 
@@ -242,14 +242,18 @@ export default function CreateProducts() {
       <SelectCmp
         name="Sizes"
         multiple
-        value={specification.shoeSizes}
+        value={specification.sizes || []}
         onChange={handleSelect}
         renderValue={(selected) => selected.join(", ")}
       >
         {[35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, "Other"].map(
           (size) => (
             <MenuItem key={size} value={size}>
-              <Checkbox checked={specification.shoeSizes.indexOf(size) > -1} />
+              <Checkbox
+                checked={
+                  specification.sizes && specification.sizes.indexOf(size) > -1
+                }
+              />
               <ListItemText primary={size} />
             </MenuItem>
           )
@@ -258,7 +262,7 @@ export default function CreateProducts() {
       <Box style={{ marginTop: "30px" }}>
         <SelectCmp
           name="Color"
-          values={specification.color}
+          value={specification.color}
           onChange={(event) =>
             setSpecification((prevState) => ({
               ...prevState,
@@ -289,7 +293,7 @@ export default function CreateProducts() {
       <Box style={{ marginTop: "30px" }}>
         <SelectCmp
           name="Condition"
-          values={specification.condition}
+          value={specification.condition}
           onChange={(event) =>
             setSpecification((prevState) => ({
               ...prevState,
@@ -307,7 +311,7 @@ export default function CreateProducts() {
       <Box style={{ marginTop: "30px" }}>
         <SelectCmp
           name="Gender"
-          values={specification.gender}
+          value={specification.gender}
           onChange={(event) =>
             setSpecification((prevState) => ({
               ...prevState,
@@ -322,7 +326,26 @@ export default function CreateProducts() {
           ))}
         </SelectCmp>
       </Box>
-
+      <Box style={{ marginTop: "30px" }}>
+        <SelectCmp
+          name="Style"
+          value={specification.style}
+          onChange={(event) =>
+            setSpecification((prevState) => ({
+              ...prevState,
+              style: event.target.value,
+            }))
+          }
+        >
+          {["Sporting shoes", "Fashion shoes", "Sandals and slides"].map(
+            (style) => (
+              <MenuItem key={style} value={style}>
+                <ListItemText primary={style} />
+              </MenuItem>
+            )
+          )}
+        </SelectCmp>
+      </Box>
       <TextField
         required
         style={{ marginTop: "30px" }}
@@ -334,7 +357,7 @@ export default function CreateProducts() {
         multiline
         value={specification.description}
         rows={5}
-        placeholder="What other details do you want buyers to know about this shoe?"
+        placeholder="What other details do you want buyers to know about this product?"
         onChange={(e) =>
           setSpecification((prevState) => ({
             ...prevState,

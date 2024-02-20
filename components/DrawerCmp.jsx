@@ -28,7 +28,7 @@ export default function DrawerCmp({ open, setDrawerCmp }) {
             textDecoration: "underline",
           }}
         >
-          Sell your Nike shoes today!
+          Sell your Nike products today!
         </Typography>
       </Link>
     </Drawer>

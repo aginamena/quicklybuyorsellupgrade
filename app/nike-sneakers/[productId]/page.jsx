@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
   const parsedTitle =
     productDetails.title.replaceAll("-", " ") +
     " | " +
-    "Quickly buy or sell your Nike shoes today!";
+    "Quickly buy or sell your Nike products today!";
   const parsedDescription = productDetails.description.replaceAll("-", " ");
 
   return {
@@ -58,7 +58,7 @@ export default async function NikeSneakerDetails({ params }) {
         productId={productDetails.productId}
         productStatus={productDetails.productStatus}
         description={productDetails.description}
-        shoeSizes={productDetails.shoeSizes}
+        sizes={productDetails.sizes}
         gender={productDetails.gender}
         color={productDetails.color}
         condition={productDetails.condition}

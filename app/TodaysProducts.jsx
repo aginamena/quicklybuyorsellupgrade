@@ -42,7 +42,9 @@ export default async function TodaysProducts() {
       <DisplayProducts products={last8Products} isPrivate={false} />
       <Box style={{ textAlign: "center", marginTop: "30px" }}>
         <Link href="nike-sneakers">
-          <Button variant="outlined">Explore all products</Button>
+          <Button variant="outlined" size="large">
+            Explore all products
+          </Button>
         </Link>
       </Box>
     </Container>

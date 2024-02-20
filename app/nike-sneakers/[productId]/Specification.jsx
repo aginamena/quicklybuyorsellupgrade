@@ -9,7 +9,7 @@ export default function Specification({
   description,
   productId,
   productStatus,
-  shoeSizes,
+  sizes,
   gender,
   color,
   condition,
@@ -53,7 +53,7 @@ export default function Specification({
         Summary
       </Typography>
       <ProductSummary
-        shoeSizes={shoeSizes}
+        sizes={sizes}
         gender={gender}
         color={color}
         condition={condition}

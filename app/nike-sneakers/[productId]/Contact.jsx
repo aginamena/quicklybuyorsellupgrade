@@ -1,11 +1,25 @@
 "use client";
+import { getUser } from "@/util";
 import { Box, Button, Paper, Typography } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Contact({ title, amount, productId }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
+  const router = useRouter();
+
+  function goToMyAccount() {
+    const user = getUser();
+    if (user && Object.keys(user).length > 0) {
+      router.push(
+        `../my-account?tab=0&productId=${productId}&create-copy=true`
+      );
+      return;
+    }
+    alert("You have to sign in first.");
+  }
 
   return (
     <>
@@ -56,15 +70,15 @@ export default function Contact({ title, amount, productId }) {
           Do not forget to give us review!
         </Typography>
       </Paper>
-      <Link href={`my-account?tab=0&productId=${productId}`}>
-        <Button
-          size="large"
-          variant="outlined"
-          style={{ width: "100%", marginTop: "30px" }}
-        >
-          Post ad like this
-        </Button>
-      </Link>
+
+      <Button
+        size="large"
+        variant="outlined"
+        style={{ width: "100%", marginTop: "30px" }}
+        onClick={goToMyAccount}
+      >
+        Post ad like this
+      </Button>
     </>
   );
 }

@@ -21,7 +21,7 @@ import Image from "next/image";
 import BackdropCmp from "@/components/BackdropCmp";
 import SelectCmp from "@/components/SelectCmp";
 import SnackbarCmp from "@/components/SnackbarCmp";
-import { getFromFirestore } from "@/util";
+import { getFromFirestore, getUser } from "@/util";
 import { PostImage } from "./style";
 import { createProduct } from "./util";
 import { useSearchParams } from "next/navigation";
@@ -99,6 +99,7 @@ export default function CreateProducts() {
       // After the user has edited thier product, set the edit product state to false
       setIsEditingProduct(false);
     } catch (error) {
+      console.log(error);
       alert("An error occured");
       setBackdropCmp(false);
     }
@@ -114,12 +115,24 @@ export default function CreateProducts() {
 
   useEffect(() => {
     const productId = searchParams.get("productId");
+    const createCopyOfProduct = searchParams.get("create-copy");
+
     async function init() {
       if (productId) {
         setLoading(true);
         const product = await getFromFirestore(`products/${productId}`);
         setIsEditingProduct(true);
-        setSpecification({ ...product, originalFiles: product.files });
+
+        if (createCopyOfProduct) {
+          //create copy of a product create copy of a product from the product details page to the current logged in
+          //users account
+          product.files = [];
+          delete product.productId;
+          setSpecification({ ...product });
+        } else {
+          setSpecification({ ...product, originalFiles: product.files });
+        }
+
         setLoading(false);
       }
     }

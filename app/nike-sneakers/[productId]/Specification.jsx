@@ -3,11 +3,16 @@
 import { isUserAdmin } from "@/util";
 import { Box, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import ProductSummary from "./ProductSummary";
 
 export default function Specification({
   description,
   productId,
   productStatus,
+  sizes,
+  gender,
+  color,
+  condition,
 }) {
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -17,35 +22,46 @@ export default function Specification({
 
   return (
     <Paper style={{ padding: "30px", marginTop: "40px" }}>
-      <Box style={{ marginBottom: "40px" }}>
-        {isAdmin && (
-          <>
-            <Typography
-              style={{
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <b>ProductId </b>
-              <span style={{ margin: "0 5px" }}>:</span>
-              <span style={{ color: "#dedede" }}>{productId}</span>
-            </Typography>
-            <Typography
-              style={{
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <b>Product status </b>
-              <span style={{ margin: "0 5px" }}>:</span>
-              <span style={{ color: "#dedede" }}>{productStatus}</span>
-            </Typography>
-          </>
-        )}
-      </Box>
+      {isAdmin && (
+        <Box style={{ marginBottom: "40px" }}>
+          <Typography
+            style={{
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <b>ProductId </b>
+            <span style={{ margin: "0 5px" }}>:</span>
+            <span style={{ color: "#dedede" }}>{productId}</span>
+          </Typography>
+          <Typography
+            style={{
+              marginBottom: "10px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <b>Product status </b>
+            <span style={{ margin: "0 5px" }}>:</span>
+            <span style={{ color: "#dedede" }}>{productStatus}</span>
+          </Typography>
+        </Box>
+      )}
+
       <Typography variant="h6" style={{ marginBottom: "10px" }}>
+        Summary
+      </Typography>
+      <ProductSummary
+        sizes={sizes}
+        gender={gender}
+        color={color}
+        condition={condition}
+      />
+      <Typography
+        variant="h6"
+        style={{ marginBottom: "10px", marginTop: "30px" }}
+      >
         Description
       </Typography>
       <Typography

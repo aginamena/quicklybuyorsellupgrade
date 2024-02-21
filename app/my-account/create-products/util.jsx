@@ -13,8 +13,8 @@ export async function createProduct(specification) {
   const listOfFilePaths = await uploadFiles(specification, email, productId);
   const productsCollection = `products/${productId}`;
 
-  //if the user is editing thier product, we simply update the existing fields otherwise, create a new
-  //product
+  // if the user is editing their product, we simply update the existing fields otherwise, create a new
+  // product
   if (specification.productId) {
     specification = {
       ...specification,
@@ -39,7 +39,7 @@ export async function createProduct(specification) {
 
 async function uploadFiles(specification, email, productId) {
   //if we're editing a product, we delete all images associated with that product from cloud storage
-  //and upload new one
+  //and upload new ones
   if (specification.originalFiles) {
     for (var i = 0; i < specification.originalFiles.length; i++) {
       if (!specification.files.includes(specification.originalFiles[i])) {

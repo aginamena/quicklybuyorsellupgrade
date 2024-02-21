@@ -11,33 +11,11 @@ import { useState } from "react";
 
 import Link from "next/link";
 
-import { useMyAccountContext } from "@/context/myAccount";
 import { deleteDataInFirestore } from "@/util";
-import BackdropCmp from "../BackdropCmp";
 import DialogCmp from "../DialogCmp";
-import SnackbarCmp from "../SnackbarCmp";
 
 export default function PopoverCmp({ popup, setPopup, productId, title }) {
-  const { setTabPosition, setSelectedProductId } = useMyAccountContext();
   const [dialogCmp, setDialogCmp] = useState(false);
-  const [backdropCmp, setBackdropCmp] = useState(false);
-  const [snackbarCmp, setSnackbarCmp] = useState({
-    shouldOpen: false,
-    message: "",
-  });
-
-  function editProduct() {
-    setTabPosition(0);
-    setSelectedProductId(productId);
-  }
-
-  async function handleDeleteProduct() {
-    setBackdropCmp(true);
-    await deleteDataInFirestore(`products/${productId}`);
-    setBackdropCmp(false);
-    setDialogCmp(false);
-    setSelectedProductId(productId);
-  }
 
   return (
     <Popover
@@ -59,15 +37,20 @@ export default function PopoverCmp({ popup, setPopup, productId, title }) {
           View created product
         </Typography>
       </Link>
-      <Typography
-        onClick={editProduct}
-        sx={{
-          p: 2,
-          cursor: "pointer",
-        }}
+      <Link
+        style={{ textDecoration: "none", color: "white" }}
+        href={`my-account?tab=0&productId=${productId}`}
       >
-        Edit product
-      </Typography>
+        <Typography
+          sx={{
+            p: 2,
+            cursor: "pointer",
+          }}
+        >
+          Edit product
+        </Typography>
+      </Link>
+
       <Typography
         onClick={() => setDialogCmp(true)}
         sx={{
@@ -77,15 +60,21 @@ export default function PopoverCmp({ popup, setPopup, productId, title }) {
       >
         Delete product
       </Typography>
-      <BackdropCmp open={backdropCmp} />
       <DialogCmp open={dialogCmp}>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText>
             Are you sure you want to delete this product?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteProduct}>Yes</Button>
+          <Link href={`my-account?tab=1&removed-product=${productId}`}>
+            <Button
+              onClick={() => deleteDataInFirestore(`products/${productId}`)}
+            >
+              Yes
+            </Button>
+          </Link>
+
           <Button
             onClick={() => {
               setDialogCmp(false);
@@ -96,11 +85,6 @@ export default function PopoverCmp({ popup, setPopup, productId, title }) {
           </Button>
         </DialogActions>
       </DialogCmp>
-      <SnackbarCmp
-        open={snackbarCmp.shouldShow}
-        closeSnackBar={setSnackbarCmp}
-        message={snackbarCmp.message}
-      />
     </Popover>
   );
 }

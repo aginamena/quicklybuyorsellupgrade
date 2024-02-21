@@ -1,13 +1,24 @@
 "use client";
-import { Box, Paper, Typography } from "@mui/material";
+import { getUser } from "@/util";
+import { Box, Button, Paper, Typography } from "@mui/material";
 
 import currencyFormatter from "currency-formatter";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default function Contact({ title, amount }) {
+export default function Contact({ title, amount, productId }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
+  const router = useRouter();
 
-  function goToFacebook() {
-    window.fbq("track", "InitiateCheckout");
+  function goToMyAccount() {
+    const user = getUser();
+    if (user && Object.keys(user).length > 0) {
+      router.push(
+        `../my-account?tab=0&productId=${productId}&create-copy=true`
+      );
+      return;
+    }
+    alert("You have to sign in first.");
   }
 
   return (
@@ -42,7 +53,6 @@ export default function Contact({ title, amount }) {
           style={{ color: "white" }}
           target="_blank"
           href="https://www.facebook.com/messages/t/mena.agina.75"
-          onClick={goToFacebook}
         >
           Message Mena here
         </a>
@@ -60,6 +70,15 @@ export default function Contact({ title, amount }) {
           Do not forget to give us review!
         </Typography>
       </Paper>
+
+      <Button
+        size="large"
+        variant="outlined"
+        style={{ width: "100%", marginTop: "30px" }}
+        onClick={goToMyAccount}
+      >
+        Post ad like this
+      </Button>
     </>
   );
 }

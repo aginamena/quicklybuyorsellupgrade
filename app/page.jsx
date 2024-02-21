@@ -1,11 +1,14 @@
+import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 import Footer from "@/components/Footer";
 import HowItWorks from "@/components/HowItWorks";
-import ValuePosition from "@/components/ValueProposition";
+import ValueProposition from "@/components/ValueProposition";
+import Image from "next/image";
 import ReveiwsAndRatings from "./ReviewAndRatings";
 import TodaysProducts from "./TodaysProducts";
 
@@ -36,27 +39,49 @@ export default function Home() {
   return (
     <>
       <Container>
-        <ValuePosition
+        <Toolbar />
+        <ValueProposition
           proposition={
             <>
               Find and buy <br />
-              your desired Nike shoes today!
+              your desired Nike products today!
             </>
           }
+          callToAction={
+            <Link href="nike-sneakers">
+              <Button variant="outlined" size="large">
+                Explore all products
+              </Button>
+            </Link>
+          }
         />
-        <Box style={{ textAlign: "center", color: "#dedede" }}>
-          <Box style={{ fontSize: "19px" }}>
-            &quot;Since day one, our mission has been to provide you with fast
-            and secure access to the Nike shoes you desire. <br /> Every product
-            showcased on our site undergoes verification by our administrators
-            before being published, ensuring a marketplace that is not only
-            speedy but also the safest destination for your Nike shoe
-            needs&quot;
-          </Box>
-          <Typography style={{ marginTop: "20px" }}>
-            Mena Agina - Founder & CEO
-          </Typography>
+        <Typography
+          variant="h6"
+          style={{
+            textAlign: "center",
+            marginBottom: "30px",
+            marginTop: "100px",
+          }}
+        >
+          Choose your style
+        </Typography>
+        <Box
+          sx={{
+            display: { xs: "block", sm: "flex" },
+            justifyContent: { xs: "center", sm: "space-evenly" },
+          }}
+        >
+          <NikeTypes
+            imageSrc="/root/sporting_shoes.jpg"
+            type="Sporting shoes"
+          />
+          <NikeTypes imageSrc="/root/fashion_shoes.jpg" type="Fashion shoes" />
+          <NikeTypes
+            imageSrc="/root/sandals_and_slides.jpg"
+            type="Sandals and slides"
+          />
         </Box>
+
         <TodaysProducts />
         <HowItWorks cards={cards} />
         <ReveiwsAndRatings />
@@ -65,5 +90,29 @@ export default function Home() {
       <Footer />
     </>
   );
-  z;
+}
+
+function NikeTypes({ imageSrc, type }) {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: { xs: "40px", sm: "0" },
+      }}
+    >
+      <Image
+        src={imageSrc}
+        width={200}
+        height={200}
+        alt={type}
+        style={{ borderRadius: "70px" }}
+      />
+      <Typography style={{ fontSize: "20px", marginTop: "18px" }}>
+        {type}
+      </Typography>
+    </Box>
+  );
 }

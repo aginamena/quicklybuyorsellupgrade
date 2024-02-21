@@ -1,5 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -8,13 +9,14 @@ import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
+import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import red from "@mui/material/colors/red";
 
 import CardCmp from "@/components/CardCmp";
 import Footer from "@/components/Footer";
-import ValuePosition from "@/components/ValueProposition";
 import HowItWorks from "@/components/HowItWorks";
+import ValueProposition from "@/components/ValueProposition";
 
 export default function SellYourProducts() {
   const cards = [
@@ -84,26 +86,23 @@ export default function SellYourProducts() {
   return (
     <>
       <Container>
-        <ValuePosition proposition="Sell your Nike shoes today!" />
-
-        <Box style={{ textAlign: "center", color: "#dedede" }}>
-          <Box style={{ fontSize: "19px" }}>
-            Our sellers are at core of our business and we are making it
-            possible for your to sell your products as quickly as possible on
-            our platform. We provide tools to make the selling faster, easier
-            and safer from managing your inventory to transaction processing on
-            our platform. <br />
-            We want you to start selling your Products from day one of
-            registering and listing your products in the site.
-          </Box>
-          <Typography style={{ marginTop: "20px" }}>
-            Mena Agina - Founder & CEO
-          </Typography>
-        </Box>
-
+        <Toolbar />
+        <ValueProposition
+          proposition="Sell your Nike products today!"
+          callToAction={
+            <Button variant="outlined" size="large">
+              Sign in today
+            </Button>
+          }
+        />
         <Typography
           variant="h6"
-          sx={{ textAlign: "center", marginBottom: "30px", marginTop: "50px" }}
+          sx={{
+            textAlign: "center",
+            marginBottom: "30px",
+            // marginTop: "100px",
+            marginTop: { sm: "100px", xs: "50px" },
+          }}
         >
           We Offer
         </Typography>
@@ -141,7 +140,7 @@ export default function SellYourProducts() {
             marginBottom: "50px",
           }}
         >
-          <Typography variant="h5">Sell you Nike shoes today!</Typography>
+          <Typography variant="h5">Sell you Nike products today!</Typography>
         </Box>
         <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
         <HowItWorks cards={howItWorks} />

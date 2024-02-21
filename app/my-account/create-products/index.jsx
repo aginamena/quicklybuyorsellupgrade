@@ -3,7 +3,10 @@ import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
   Button,
+  Checkbox,
   Divider,
+  ListItemText,
+  MenuItem,
   Stack,
   TextField,
   Typography,
@@ -18,13 +21,16 @@ import Image from "next/image";
 import BackdropCmp from "@/components/BackdropCmp";
 import SelectCmp from "@/components/SelectCmp";
 import SnackbarCmp from "@/components/SnackbarCmp";
-import { useMyAccountContext } from "@/context/myAccount";
+import { getFromFirestore, getUser } from "@/util";
 import { PostImage } from "./style";
 import { createProduct } from "./util";
-import { getFromFirestore } from "@/util";
+import { useSearchParams } from "next/navigation";
 
 export default function CreateProducts() {
-  const [specification, setSpecification] = useState({ files: [] });
+  const [specification, setSpecification] = useState({
+    files: [],
+    sizes: [],
+  });
   const [loading, setLoading] = useState(false);
   const [isEditingProduct, setIsEditingProduct] = useState(false);
   const [snackbarCmp, setSnackbarCmp] = useState({
@@ -32,9 +38,9 @@ export default function CreateProducts() {
     message: "",
   });
   const [backdropCmp, setBackdropCmp] = useState(false);
-  const { selectedProductId, setSelectedProductId } = useMyAccountContext();
 
   const theme = useTheme();
+  const searchParams = useSearchParams();
 
   const isMediumScreenSizeAndBelow = useMediaQuery(
     theme.breakpoints.down("md")
@@ -77,6 +83,7 @@ export default function CreateProducts() {
       alert(`Title should be less than ${maximumLengthOfTitle} characters`);
       return;
     }
+
     try {
       setBackdropCmp(true);
       // if we're editing the product, we need to keep the current product id
@@ -92,25 +99,45 @@ export default function CreateProducts() {
       // After the user has edited thier product, set the edit product state to false
       setIsEditingProduct(false);
     } catch (error) {
+      console.log(error);
       alert("An error occured");
       setBackdropCmp(false);
     }
   }
 
+  function handleSelect(event) {
+    const value = event.target.value;
+    setSpecification((prevState) => ({
+      ...prevState,
+      sizes: typeof value === "string" ? value.split(",") : value,
+    }));
+  }
+
   useEffect(() => {
-    if (selectedProductId.length > 0) {
-      async function loadProduct() {
+    const productId = searchParams.get("productId");
+    const createCopyOfProduct = searchParams.get("create-copy");
+
+    async function init() {
+      if (productId) {
         setLoading(true);
-        const product = await getFromFirestore(`products/${selectedProductId}`);
+        const product = await getFromFirestore(`products/${productId}`);
         setIsEditingProduct(true);
-        setSpecification({ ...product, originalFiles: product.files });
+
+        if (createCopyOfProduct) {
+          //create copy of a product create copy of a product from the product details page to the current logged in
+          //users account
+          product.files = [];
+          delete product.productId;
+          setSpecification({ ...product });
+        } else {
+          setSpecification({ ...product, originalFiles: product.files });
+        }
+
         setLoading(false);
-        setSelectedProductId("");
       }
-      loadProduct();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedProductId]);
+    init();
+  }, []);
 
   if (loading) {
     return <Typography>Loading...</Typography>;
@@ -119,24 +146,10 @@ export default function CreateProducts() {
     <form data-testid="Create Products Cmp" onSubmit={handleSubmit}>
       {isEditingProduct && (
         <Typography variant="h6" style={{ textAlign: "center" }}>
-          You are currently editing your product
+          You are currently editing this product
         </Typography>
       )}
-      <Typography style={{ marginBottom: "20px" }}>Product category</Typography>
-      <Box style={{ marginTop: "20px" }}>
-        <SelectCmp
-          name="Condition"
-          menuItems={["New", "Used"]}
-          previousSelectedValue={specification.condition}
-          handleSelect={(value) =>
-            setSpecification({
-              ...specification,
-              condition: value,
-            })
-          }
-        />
-      </Box>
-      <Box style={{ marginTop: "30px", marginBottom: "30px" }}>
+      <Box style={{ marginBottom: "30px" }}>
         <Typography style={{ marginBottom: "10px" }}>
           Product image(s)
         </Typography>
@@ -187,7 +200,6 @@ export default function CreateProducts() {
                   opacity: "0.7",
                 }}
               />
-
               <div onClick={() => removeFile(index)}>
                 <ClearIcon
                   style={{
@@ -204,7 +216,6 @@ export default function CreateProducts() {
           ))}
         </Stack>
       </Box>
-
       <Typography style={{ marginBottom: "10px" }}>Product details</Typography>
 
       <TextField
@@ -238,9 +249,118 @@ export default function CreateProducts() {
         }
         label="Price (NGN)"
       />
+
+      <SelectCmp
+        name="Sizes"
+        multiple
+        value={specification.sizes || []}
+        onChange={handleSelect}
+        renderValue={(selected) => selected.join(", ")}
+      >
+        {[35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, "Other"].map(
+          (size) => (
+            <MenuItem key={size} value={size}>
+              <Checkbox
+                checked={
+                  specification.sizes && specification.sizes.indexOf(size) > -1
+                }
+              />
+              <ListItemText primary={size} />
+            </MenuItem>
+          )
+        )}
+      </SelectCmp>
+      <Box style={{ marginTop: "30px" }}>
+        <SelectCmp
+          name="Color"
+          value={specification.color}
+          onChange={(event) =>
+            setSpecification((prevState) => ({
+              ...prevState,
+              color: event.target.value,
+            }))
+          }
+        >
+          {[
+            "Black",
+            "Blue",
+            "Brown",
+            "White",
+            "Ash",
+            "Gray",
+            "Green",
+            "Pink",
+            "Purple",
+            "Red",
+            "Yellow",
+            "MultiColor",
+          ].map((color) => (
+            <MenuItem key={color} value={color}>
+              <ListItemText primary={color} />
+            </MenuItem>
+          ))}
+        </SelectCmp>
+      </Box>
+      <Box style={{ marginTop: "30px" }}>
+        <SelectCmp
+          name="Condition"
+          value={specification.condition}
+          onChange={(event) =>
+            setSpecification((prevState) => ({
+              ...prevState,
+              condition: event.target.value,
+            }))
+          }
+        >
+          {["New", "Used"].map((condition) => (
+            <MenuItem key={condition} value={condition}>
+              <ListItemText primary={condition} />
+            </MenuItem>
+          ))}
+        </SelectCmp>
+      </Box>
+      <Box style={{ marginTop: "30px" }}>
+        <SelectCmp
+          name="Gender"
+          value={specification.gender}
+          onChange={(event) =>
+            setSpecification((prevState) => ({
+              ...prevState,
+              gender: event.target.value,
+            }))
+          }
+        >
+          {["Male", "Female", "Unisex"].map((gender) => (
+            <MenuItem key={gender} value={gender}>
+              <ListItemText primary={gender} />
+            </MenuItem>
+          ))}
+        </SelectCmp>
+      </Box>
+      <Box style={{ marginTop: "30px" }}>
+        <SelectCmp
+          name="Style"
+          value={specification.style}
+          onChange={(event) =>
+            setSpecification((prevState) => ({
+              ...prevState,
+              style: event.target.value,
+            }))
+          }
+        >
+          {["Sporting shoes", "Fashion shoes", "Sandals and slides"].map(
+            (style) => (
+              <MenuItem key={style} value={style}>
+                <ListItemText primary={style} />
+              </MenuItem>
+            )
+          )}
+        </SelectCmp>
+      </Box>
       <TextField
         required
-        name="Product description"
+        style={{ marginTop: "30px" }}
+        label="Product description"
         variant="outlined"
         data-testid="description"
         fullWidth
@@ -248,12 +368,12 @@ export default function CreateProducts() {
         multiline
         value={specification.description}
         rows={5}
-        placeholder="Provide details like&#10;Size = ...&#10;Colour = ...&#10;What other details do you want buyers to know about?"
+        placeholder="What other details do you want buyers to know about this product?"
         onChange={(e) =>
-          setSpecification({
-            ...specification,
+          setSpecification((prevState) => ({
+            ...prevState,
             description: e.target.value,
-          })
+          }))
         }
       />
       <Box style={{ marginTop: "40px", marginBottom: "30px" }}>
@@ -275,7 +395,3 @@ export default function CreateProducts() {
     </form>
   );
 }
-
-// export default function CreateProducts() {
-//   return <div>Create product</div>;
-// }

@@ -7,15 +7,15 @@ import {
   DialogContent,
   DialogContentText,
 } from "@mui/material";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import BackdropCmp from "@/components/BackdropCmp";
 import SnackbarCmp from "@/components/SnackbarCmp";
 
 import DialogCmp from "@/components/DialogCmp";
-import { acceptProduct, rejectProduct } from "./util";
 import { isUserAdmin } from "@/util";
+import { acceptProduct, rejectProduct } from "./util";
 
 export default function AdminPanel({ productId }) {
   const [snackbarCmp, setSnackbarCmp] = useState({
@@ -62,6 +62,9 @@ export default function AdminPanel({ productId }) {
           <Button color="error" onClick={() => setDialogCmp(true)}>
             Reject product
           </Button>
+          <Link href={`/my-account?tab=0&productId=${productId}`}>
+            <Button>Edit product</Button>
+          </Link>
           <BackdropCmp open={backdropCmp} />
           <SnackbarCmp
             open={snackbarCmp.shouldShow}

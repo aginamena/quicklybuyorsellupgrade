@@ -8,7 +8,7 @@ import {
 import { getUser, storeDataInFirestore, updateDataInFirestore } from "@/util";
 
 export async function createProduct(specification) {
-  const { email } = getUser();
+  const email = specification.creatorOfProduct || getUser().email;
   const productId = specification.productId || getUniqueId();
   const listOfFilePaths = await uploadFiles(specification, email, productId);
   const productsCollection = `products/${productId}`;

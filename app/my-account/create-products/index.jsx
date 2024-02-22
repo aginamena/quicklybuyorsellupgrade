@@ -116,7 +116,6 @@ export default function CreateProducts() {
   useEffect(() => {
     const productId = searchParams.get("productId");
     const createCopyOfProduct = searchParams.get("create-copy");
-
     async function init() {
       if (productId) {
         setLoading(true);

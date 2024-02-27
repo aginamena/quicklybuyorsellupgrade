@@ -6,13 +6,12 @@ import { useEffect, useState } from "react";
 import ProductSummary from "./ProductSummary";
 
 export default function Specification({
-  description,
   productId,
   productStatus,
   sizes,
-  gender,
+  location,
   color,
-  condition,
+  type,
 }) {
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -54,25 +53,10 @@ export default function Specification({
       </Typography>
       <ProductSummary
         sizes={sizes}
-        gender={gender}
+        type={type}
         color={color}
-        condition={condition}
+        location={location}
       />
-      <Typography
-        variant="h6"
-        style={{ marginBottom: "10px", marginTop: "30px" }}
-      >
-        Description
-      </Typography>
-      <Typography
-        style={{
-          wordWrap: "break-word",
-          whiteSpace: "pre-wrap",
-          color: "#dedede",
-        }}
-      >
-        {description}
-      </Typography>
     </Paper>
   );
 }

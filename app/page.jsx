@@ -63,7 +63,7 @@ export default function Home() {
             marginTop: "100px",
           }}
         >
-          Choose your style
+          We provide
         </Typography>
         <Box
           sx={{
@@ -80,6 +80,22 @@ export default function Home() {
             imageSrc="/root/sandals_and_slides.jpg"
             type="Sandals and slides"
           />
+        </Box>
+        <Box
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "30px",
+          }}
+        >
+          <Typography>Choose your location:</Typography>
+          <Box>
+            <Button>Rivers</Button>
+            <Button>Lagos</Button>
+            <Button>Abuja</Button>
+            <Button>Jos</Button>
+          </Box>
         </Box>
 
         <TodaysProducts />

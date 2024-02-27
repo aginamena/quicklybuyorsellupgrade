@@ -9,34 +9,23 @@ import SimilarProducts from "./SimilarProducts";
 
 export async function generateMetadata({ params }) {
   const details = await getFromFirestore(`products/${params.productId}`);
-  const creatorOfProduct = await getFromFirestore(
-    `profiles/${details.creatorOfProduct}`
-  );
-  const productDetails = { ...details, creatorOfProduct };
-
   const parsedTitle =
-    productDetails.title.replaceAll("-", " ") +
+    details.title.replaceAll("-", " ") +
     " | " +
     "Quickly buy or sell your Nike products today!";
-  const parsedDescription = productDetails.description.replaceAll("-", " ");
 
   return {
     title: parsedTitle,
-    description: parsedDescription,
     openGraph: {
       title: parsedTitle,
-      description: parsedDescription,
-      images: productDetails.files,
+      images: details.files,
     },
   };
 }
 
 export default async function NikeSneakerDetails({ params }) {
   const details = await getFromFirestore(`products/${params.productId}`);
-  const creatorOfProduct = await getFromFirestore(
-    `profiles/${details.creatorOfProduct}`
-  );
-  const productDetails = { ...details, creatorOfProduct };
+  const productDetails = { ...details };
 
   return (
     <Container style={{ marginBottom: "50px" }}>
@@ -58,11 +47,10 @@ export default async function NikeSneakerDetails({ params }) {
       <Specification
         productId={productDetails.productId}
         productStatus={productDetails.productStatus}
-        description={productDetails.description}
         sizes={productDetails.sizes}
-        gender={productDetails.gender}
+        location={productDetails.location}
+        type={productDetails.type}
         color={productDetails.color}
-        condition={productDetails.condition}
       />
       <AdminPanel productId={params.productId} />
       <SimilarProducts amount={productDetails.amount} />

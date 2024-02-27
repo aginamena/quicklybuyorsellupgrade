@@ -75,10 +75,6 @@ export default function CreateProducts() {
       alert("Enter atleast 1 image");
       return;
     }
-    if (specification.description.length == 0) {
-      alert("Description can't be empty");
-      return;
-    }
     if (specification.title.length > maximumLengthOfTitle) {
       alert(`Title should be less than ${maximumLengthOfTitle} characters`);
       return;
@@ -124,7 +120,7 @@ export default function CreateProducts() {
 
         if (createCopyOfProduct) {
           //create copy of a product create copy of a product from the product details page to the current logged in
-          //users account
+          //users account. This is when the user clicks on the "Post Ad like this" button
           product.files = [];
           delete product.productId;
           setSpecification({ ...product });
@@ -219,7 +215,7 @@ export default function CreateProducts() {
 
       <TextField
         required
-        label="Product title"
+        label="Title"
         variant="outlined"
         defaultValue={specification.title}
         value={specification.title}
@@ -256,18 +252,19 @@ export default function CreateProducts() {
         onChange={handleSelect}
         renderValue={(selected) => selected.join(", ")}
       >
-        {[35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, "Other"].map(
-          (size) => (
-            <MenuItem key={size} value={size}>
-              <Checkbox
-                checked={
-                  specification.sizes && specification.sizes.indexOf(size) > -1
-                }
-              />
-              <ListItemText primary={size} />
-            </MenuItem>
-          )
-        )}
+        {[
+          30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+          47, 48, 49, 50,
+        ].map((size) => (
+          <MenuItem key={size} value={size}>
+            <Checkbox
+              checked={
+                specification.sizes && specification.sizes.indexOf(size) > -1
+              }
+            />
+            <ListItemText primary={size} />
+          </MenuItem>
+        ))}
       </SelectCmp>
       <Box style={{ marginTop: "30px" }}>
         <SelectCmp
@@ -300,79 +297,39 @@ export default function CreateProducts() {
           ))}
         </SelectCmp>
       </Box>
+
       <Box style={{ marginTop: "30px" }}>
         <SelectCmp
-          name="Condition"
-          value={specification.condition}
+          name="Type"
+          value={specification.type}
           onChange={(event) =>
             setSpecification((prevState) => ({
               ...prevState,
-              condition: event.target.value,
+              type: event.target.value,
             }))
           }
         >
-          {["New", "Used"].map((condition) => (
-            <MenuItem key={condition} value={condition}>
-              <ListItemText primary={condition} />
+          {["Shoes", "Sandals", "Slides"].map((type) => (
+            <MenuItem key={type} value={type}>
+              <ListItemText primary={type} />
             </MenuItem>
           ))}
-        </SelectCmp>
-      </Box>
-      <Box style={{ marginTop: "30px" }}>
-        <SelectCmp
-          name="Gender"
-          value={specification.gender}
-          onChange={(event) =>
-            setSpecification((prevState) => ({
-              ...prevState,
-              gender: event.target.value,
-            }))
-          }
-        >
-          {["Male", "Female", "Unisex"].map((gender) => (
-            <MenuItem key={gender} value={gender}>
-              <ListItemText primary={gender} />
-            </MenuItem>
-          ))}
-        </SelectCmp>
-      </Box>
-      <Box style={{ marginTop: "30px" }}>
-        <SelectCmp
-          name="Style"
-          value={specification.style}
-          onChange={(event) =>
-            setSpecification((prevState) => ({
-              ...prevState,
-              style: event.target.value,
-            }))
-          }
-        >
-          {["Sporting shoes", "Fashion shoes", "Sandals and slides"].map(
-            (style) => (
-              <MenuItem key={style} value={style}>
-                <ListItemText primary={style} />
-              </MenuItem>
-            )
-          )}
         </SelectCmp>
       </Box>
       <TextField
         required
-        style={{ marginTop: "30px" }}
-        label="Product description"
+        label="Pickup city"
         variant="outlined"
-        data-testid="description"
+        style={{ marginTop: "30px" }}
+        placeholder="Rivers, Lagos, Abuja, etc"
+        defaultValue={specification.location}
+        value={specification.location}
         fullWidth
-        inputProps={{ "data-testid": "Product description" }}
-        multiline
-        value={specification.description}
-        rows={5}
-        placeholder="What other details do you want buyers to know about this product?"
         onChange={(e) =>
-          setSpecification((prevState) => ({
-            ...prevState,
-            description: e.target.value,
-          }))
+          setSpecification({
+            ...specification,
+            location: e.target.value,
+          })
         }
       />
       <Box style={{ marginTop: "40px", marginBottom: "30px" }}>

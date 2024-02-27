@@ -3,9 +3,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 
-export default function ProductSummary({ sizes, gender, color, condition }) {
+export default function ProductSummary({ sizes, location, color, type }) {
   return (
-    <Table style={{ width: "200px" }}>
+    <Table style={{ width: "250px" }}>
       <TableBody>
         <TableRow key="Size">
           <TableCell>Size(s)</TableCell>
@@ -15,13 +15,13 @@ export default function ProductSummary({ sizes, gender, color, condition }) {
           <TableCell>Color</TableCell>
           <TableCell> {color}</TableCell>
         </TableRow>
-        <TableRow key="Gender">
-          <TableCell>Gender</TableCell>
-          <TableCell> {gender}</TableCell>
+        <TableRow key="Location">
+          <TableCell>Pickup location</TableCell>
+          <TableCell> {location} state</TableCell>
         </TableRow>
-        <TableRow key="Condtiton">
-          <TableCell>Condition</TableCell>
-          <TableCell> {condition}</TableCell>
+        <TableRow key="Type">
+          <TableCell>Type</TableCell>
+          <TableCell> {type}</TableCell>
         </TableRow>
       </TableBody>
     </Table>

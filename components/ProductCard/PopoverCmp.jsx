@@ -29,9 +29,7 @@ export default function PopoverCmp({ popup, setPopup, productId, title }) {
     >
       <Link
         style={{ textDecoration: "none", color: "white" }}
-        href={`../nike-sneakers/${productId}?title=${title
-          .trim()
-          .replaceAll(" ", "-")}`}
+        href={`../all/${productId}?title=${title.trim().replaceAll(" ", "-")}`}
       >
         <Typography sx={{ p: 2, cursor: "pointer" }}>
           View created product

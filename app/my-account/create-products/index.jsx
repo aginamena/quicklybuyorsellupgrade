@@ -154,7 +154,7 @@ export default function CreateProducts() {
               type="file"
               multiple
               data-testid="image"
-              accept="image/jpeg, image/png, video/mp4"
+              accept="image/jpeg, image/png"
               onChange={(e) => addFiles(e.target.files)}
             />
 

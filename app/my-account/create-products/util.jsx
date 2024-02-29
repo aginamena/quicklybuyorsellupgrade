@@ -16,12 +16,8 @@ export async function createProduct(specification) {
   // if the user is editing their product, we simply update the existing fields otherwise, create a new
   // product
   if (specification.productId) {
-    specification = {
-      ...specification,
-      productStatus: "On review",
-      files: listOfFilePaths,
-    };
-    delete specification.originalFiles;
+    specification.productStatus = "On review";
+    specification.files = listOfFilePaths;
     await updateDataInFirestore(productsCollection, specification);
   } else {
     specification = {

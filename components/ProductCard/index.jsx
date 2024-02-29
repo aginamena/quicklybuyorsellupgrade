@@ -4,8 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 import currencyFormatter from "currency-formatter";
 
@@ -23,6 +26,7 @@ export default function Displaycard({
   productId,
   isPrivate,
   productStatus,
+  location,
 }) {
   const maximumLengthOfAmount = 15;
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
@@ -34,9 +38,7 @@ export default function Displaycard({
       href={
         isPrivate
           ? ""
-          : `../nike-sneakers/${productId}?title=${title
-              .trim()
-              .replaceAll(" ", "-")}`
+          : `../all/${productId}?title=${title.trim().replaceAll(" ", "-")}`
       }
     >
       <CardCmp>
@@ -72,7 +74,10 @@ export default function Displaycard({
               ? formattedAmount.substring(0, maximumLengthOfAmount) + "..."
               : formattedAmount}
           </Typography>
-
+          <Box style={{ display: "flex" }}>
+            <LocationOnIcon style={{ color: "#dedede" }} />
+            <Typography style={{ color: "#dedede" }}>{location}</Typography>
+          </Box>
           {isPrivate && (
             <>
               <Divider

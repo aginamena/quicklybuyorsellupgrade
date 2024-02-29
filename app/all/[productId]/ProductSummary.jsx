@@ -17,7 +17,7 @@ export default function ProductSummary({ sizes, location, color, type }) {
         </TableRow>
         <TableRow key="Location">
           <TableCell>Pickup location</TableCell>
-          <TableCell> {location} state</TableCell>
+          <TableCell> {location}</TableCell>
         </TableRow>
         <TableRow key="Type">
           <TableCell>Type</TableCell>

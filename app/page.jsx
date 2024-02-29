@@ -48,7 +48,7 @@ export default function Home() {
             </>
           }
           callToAction={
-            <Link href="nike-sneakers">
+            <Link href="all">
               <Button variant="outlined" size="large">
                 Explore all products
               </Button>
@@ -71,15 +71,9 @@ export default function Home() {
             justifyContent: { xs: "center", sm: "space-evenly" },
           }}
         >
-          <NikeTypes
-            imageSrc="/root/sporting_shoes.jpg"
-            type="Sporting shoes"
-          />
-          <NikeTypes imageSrc="/root/fashion_shoes.jpg" type="Fashion shoes" />
-          <NikeTypes
-            imageSrc="/root/sandals_and_slides.jpg"
-            type="Sandals and slides"
-          />
+          <NikeTypes imageSrc="/root/sandals.jpg" type="Sandals" />
+          <NikeTypes imageSrc="/root/shoes.jpg" type="Shoes" />
+          <NikeTypes imageSrc="/root/slides.jpg" type="Slides" />
         </Box>
         <Box
           style={{

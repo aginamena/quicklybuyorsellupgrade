@@ -1,5 +1,6 @@
 import {
   auth,
+  collection,
   deleteDoc,
   doc,
   firestore,
@@ -7,6 +8,7 @@ import {
   getDocs,
   provider,
   setDoc,
+  query,
   signInWithPopup,
   updateDoc,
 } from "@/config/firebase";
@@ -33,6 +35,19 @@ export async function executeQueryOnProductsCollection(query) {
     result.push(doc.data());
   });
   return result;
+}
+
+export async function deleteAllData() {
+  const q = query(collection(firestore, "products"));
+  const querySnapshot = await getDocs(q);
+  const result = [];
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.creatorOfProduct == "olawumimoshood7@gmail.com") {
+      result.push(deleteDataInFirestore(`products/${data.productId}`));
+    }
+  });
+  await Promise.all(result);
 }
 
 export function getUser() {

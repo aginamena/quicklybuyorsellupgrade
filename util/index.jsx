@@ -43,8 +43,12 @@ export async function deleteAllData() {
   const result = [];
   querySnapshot.forEach((doc) => {
     const data = doc.data();
-    if (data.creatorOfProduct == "olawumimoshood7@gmail.com") {
-      result.push(deleteDataInFirestore(`products/${data.productId}`));
+    if (
+      data.creatorOfProduct == "ezefaithblaze@gmail.com" ||
+      data.creatorOfProduct == "maryannudoji@gmail.com"
+    ) {
+      data.amount = Math.round(data.amount);
+      result.push(updateDataInFirestore(`products/${data.productId}`, data));
     }
   });
   await Promise.all(result);

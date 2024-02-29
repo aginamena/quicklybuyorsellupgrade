@@ -321,7 +321,7 @@ export default function CreateProducts() {
         label="Pickup city"
         variant="outlined"
         style={{ marginTop: "30px" }}
-        placeholder="Rivers, Lagos, Abuja, etc"
+        placeholder="[state name] state - [capital name]. E.g, [Rivers] state - [Port Harcourt]"
         defaultValue={specification.location}
         value={specification.location}
         fullWidth

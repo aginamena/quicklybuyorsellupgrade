@@ -12,8 +12,7 @@ export async function createProduct(specification) {
   const productId = specification.productId || getUniqueId();
   const listOfFilePaths = await uploadFiles(specification, email, productId);
   const productsCollection = `products/${productId}`;
-  const commissionFee = 1.12;
-  specification.amount = specification.amount * commissionFee;
+
   // if the user is editing their product, we simply update the existing fields otherwise, create a new
   // product
   if (specification.productId) {

@@ -5,7 +5,13 @@ import {
   storage,
   uploadBytes,
 } from "@/config/firebase";
-import { getUser, storeDataInFirestore, updateDataInFirestore } from "@/util";
+import {
+  getUser,
+  storeDataInFirestore,
+  updateDataInFirestore,
+  getFileUrl,
+  getUniqueId,
+} from "@/util";
 
 export async function createProduct(specification) {
   const email = specification.creatorOfProduct || getUser().email;
@@ -47,15 +53,9 @@ async function uploadFiles(specification, email, productId) {
   }
 
   return await Promise.all(
-    specification.files.map(async (file) => {
-      const fileId = getUniqueId();
-      const pathToFile = `${email}/${productId}/${fileId}`;
-      if (typeof file === "string") return file;
-      //upload the new file
-      await uploadFile(file, pathToFile);
-      const url = await getUploadedFileUrl(pathToFile, "products");
-      return url;
-    })
+    specification.files.map(async (file) =>
+      getFileUrl(file, email, productId, "products")
+    )
   );
 }
 
@@ -68,22 +68,4 @@ function extractFileIdFromPath(filePath) {
 
 async function deleteFromStorage(path) {
   await deleteObject(ref(storage, path));
-}
-
-async function uploadFile(file, pathToFile) {
-  const storageRef = ref(storage, `/products/${pathToFile}`);
-  await uploadBytes(storageRef, file);
-}
-
-async function getUploadedFileUrl(path) {
-  return await getDownloadURL(ref(storage, `products/${path}`));
-}
-
-function getUniqueId() {
-  return (
-    Date.now().toString(36) +
-    Math.floor(
-      Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)
-    ).toString(36)
-  );
 }

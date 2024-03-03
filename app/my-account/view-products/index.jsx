@@ -6,7 +6,6 @@ import { Typography } from "@mui/material";
 import DisplayProducts from "@/components/DisplayProducts";
 import { getUser } from "@/util";
 import { getAllProducts } from "./util";
-import { useMyAccountContext } from "@/context/myAccount";
 import { useSearchParams } from "next/navigation";
 
 export default function ViewProducts() {

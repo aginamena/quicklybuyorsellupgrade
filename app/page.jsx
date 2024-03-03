@@ -44,7 +44,8 @@ export default function Home() {
           proposition={
             <>
               Find and buy <br />
-              your desired Nike products today!
+              Nike products from trusted <br />
+              sellers in Rivers state
             </>
           }
           callToAction={
@@ -82,15 +83,7 @@ export default function Home() {
             justifyContent: "center",
             marginTop: "30px",
           }}
-        >
-          <Typography>Choose your location:</Typography>
-          <Box>
-            <Button>Rivers</Button>
-            <Button>Lagos</Button>
-            <Button>Abuja</Button>
-            <Button>Jos</Button>
-          </Box>
-        </Box>
+        ></Box>
 
         <TodaysProducts />
         <HowItWorks cards={cards} />

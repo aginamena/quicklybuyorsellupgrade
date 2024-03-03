@@ -14,10 +14,12 @@ import { useRouter } from "next/navigation";
 import { auth, provider, signInWithPopup } from "@/config/firebase";
 import { getUser, isUserAdmin, storeDataInFirestore } from "@/util";
 import PhoneNumber from "./PhoneNumber";
+import { useAppContext } from "@/context/app";
 
 export default function Auth() {
+  const { userProfile, setUserProfile } = useAppContext();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const [takePhoneNumber, setTakePhoneNumber] = useState({
     open: false,
     number: "",
@@ -28,8 +30,15 @@ export default function Auth() {
 
   useEffect(() => {
     const user = getUser();
-    setUser(user || {});
+    if (Object.keys(userProfile).length == 0) {
+      setUserProfile(user || {});
+    }
   }, []);
+  // useEffect(() => {
+  //   const user = getUser();
+  //   setUser(user || {});
+  //   console.log("here2");
+  // }, [auth.currentUser]);
 
   useEffect(() => {
     if (takePhoneNumber.number.length > 0) {
@@ -40,7 +49,7 @@ export default function Auth() {
 
   function logout() {
     localStorage.removeItem("user");
-    setUser({});
+    setUserProfile({});
     setTakePhoneNumber({ open: false, number: "" });
     router.push("/");
   }
@@ -49,7 +58,7 @@ export default function Auth() {
     try {
       const profile = await signInWithPopup(auth, provider);
       const { phoneNumber, email, uid, displayName, photoURL } = profile.user;
-      setUser({
+      setUserProfile({
         phoneNumber,
         email,
         uid,
@@ -64,7 +73,7 @@ export default function Auth() {
 
   async function createProfile() {
     //store profile in database
-    const updatedUser = { ...user };
+    const updatedUser = { ...userProfile };
     updatedUser.phoneNumber = takePhoneNumber.number;
     const path = `profiles/${updatedUser.email}`;
     await storeDataInFirestore(path, updatedUser);
@@ -73,14 +82,14 @@ export default function Auth() {
 
   return (
     <Box>
-      {Object.keys(user).length > 0 ? (
+      {Object.keys(userProfile).length > 0 ? (
         <Box>
           <Button
             id="basic-button"
             onClick={(event) => setAnchorEl(event.currentTarget)}
             endIcon={<KeyboardArrowDownIcon />}
           >
-            <Avatar src={user.photoURL} data-testid="image" />
+            <Avatar src={userProfile?.photoURL} data-testid="image" />
           </Button>
           {open && (
             <div data-testid="profileIconMenu">

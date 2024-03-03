@@ -12,6 +12,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import FacebookPixel from "@/components/FacebookPixel";
+import { AppContextWrapper } from "@/context/app";
 
 export const metadata = {
   title: "Quickly buy or sell your Nike products today!",
@@ -24,8 +25,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <ThemeRegistry options={{ key: "mui" }}>
-          <Header />
-          {children}
+          <AppContextWrapper>
+            <Header />
+            {children}
+          </AppContextWrapper>
         </ThemeRegistry>
         <Analytics />
         <SpeedInsights />

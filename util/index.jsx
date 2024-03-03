@@ -11,6 +11,10 @@ import {
   query,
   signInWithPopup,
   updateDoc,
+  ref,
+  uploadBytes,
+  storage,
+  getDownloadURL,
 } from "@/config/firebase";
 
 export async function getFromFirestore(path) {
@@ -57,6 +61,34 @@ export async function deleteAllData() {
 export function getUser() {
   const user = JSON.parse(localStorage.getItem("user"));
   return user;
+}
+
+export async function getFileUrl(file, email, productId, collectionName) {
+  const fileId = getUniqueId();
+  const pathToFile = `${email}/${productId}/${fileId}`;
+  if (typeof file === "string") return file;
+  //upload the new file
+  await uploadFile(file, `${collectionName}/${pathToFile}`);
+  const url = await getUploadedFileUrl(`${collectionName}/${pathToFile}`);
+  return url;
+}
+
+async function uploadFile(file, pathToFile) {
+  const storageRef = ref(storage, pathToFile);
+  await uploadBytes(storageRef, file);
+}
+
+async function getUploadedFileUrl(path) {
+  return await getDownloadURL(ref(storage, path));
+}
+
+export function getUniqueId() {
+  return (
+    Date.now().toString(36) +
+    Math.floor(
+      Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)
+    ).toString(36)
+  );
 }
 
 export async function deleteDataInFirestore(path) {

@@ -1,5 +1,5 @@
 "use client";
-import { Container, Toolbar, useMediaQuery } from "@mui/material";
+import { Container, Toolbar, useMediaQuery, Box } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import { useTheme } from "@mui/material/styles";
 
@@ -9,9 +9,9 @@ import CreateProducts from "./create-products";
 import TabPanel from "./TabPanel";
 import ViewProducts from "./view-products";
 import { TabCmp } from "./style";
-import { MyAccountContextWrapper } from "@/context/myAccount";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Settings from "./settings";
 
 export default function MyAccount() {
   const theme = useTheme();
@@ -28,7 +28,7 @@ export default function MyAccount() {
   }, [searchParams]);
 
   return (
-    <MyAccountContextWrapper parentState={{ tabPosition, setTabPosition }}>
+    <Box>
       <Toolbar />
       <Container sx={{ display: { xs: "block", md: "flex" } }}>
         <Tabs
@@ -38,10 +38,13 @@ export default function MyAccount() {
           allowScrollButtonsMobile
         >
           <Link href="my-account?tab=0" style={{ color: "white" }}>
-            <TabCmp label="Create Products" data-testid="Create Products" />
+            <TabCmp label="Create Products" />
           </Link>
           <Link href="my-account?tab=1" style={{ color: "white" }}>
-            <TabCmp label="View Products" data-testid="View Products" />
+            <TabCmp label="View Products" />
+          </Link>
+          <Link href="my-account?tab=2" style={{ color: "white" }}>
+            <TabCmp label="Settings" />
           </Link>
         </Tabs>
         <TabPanel value={tabPosition} index={0}>
@@ -50,7 +53,10 @@ export default function MyAccount() {
         <TabPanel value={tabPosition} index={1}>
           <ViewProducts />
         </TabPanel>
+        <TabPanel value={tabPosition} index={2}>
+          <Settings />
+        </TabPanel>
       </Container>
-    </MyAccountContextWrapper>
+    </Box>
   );
 }

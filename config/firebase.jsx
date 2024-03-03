@@ -8,6 +8,7 @@ import {
   setPersistence,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import {
   collection,
@@ -74,4 +75,5 @@ export {
   updateDoc,
   uploadBytes,
   where,
+  updateProfile,
 };

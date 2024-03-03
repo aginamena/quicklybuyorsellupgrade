@@ -1,17 +1,15 @@
 "use client";
+
 import { createContext, useContext, useState } from "react";
 
 const AppContext = createContext();
 
 export function AppContextWrapper({ children }) {
-  const [showDrawerCmp, setShowDrawerCmp] = useState(false);
-  // const [selectedProductId, setSelectedProductId] = useState(false);
+  const [userProfile, setUserProfile] = useState({});
 
   const sharedState = {
-    showDrawerCmp,
-    setShowDrawerCmp,
-    // selectedProductId,
-    // setSelectedProductId,
+    userProfile,
+    setUserProfile,
   };
 
   return (

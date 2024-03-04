@@ -25,6 +25,9 @@ export async function generateMetadata({ params }) {
 
 export default async function NikeSneakerDetails({ params }) {
   const details = await getFromFirestore(`products/${params.productId}`);
+  const creatorOfProduct = await getFromFirestore(
+    `profiles/${details.creatorOfProduct}`
+  );
   const productDetails = { ...details };
 
   return (
@@ -41,6 +44,7 @@ export default async function NikeSneakerDetails({ params }) {
             title={productDetails.title}
             amount={productDetails.amount}
             productId={productDetails.productId}
+            creatorOfProduct={creatorOfProduct}
           />
         </Grid>
       </Grid>

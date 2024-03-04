@@ -1,3 +1,4 @@
+"use client";
 import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -9,6 +10,8 @@ import ValueProposition from "@/components/ValueProposition";
 import Image from "next/image";
 import ReveiwsAndRatings from "./ReviewAndRatings";
 import TodaysProducts from "./TodaysProducts";
+import { useEffect } from "react";
+import Hotjar from "@hotjar/browser";
 
 //refetching the data every 5minutes (60 * 5 = 300)
 export const revalidate = 300;
@@ -34,6 +37,12 @@ export default function Home() {
       imagePath: "root/received_order_package.jpg",
     },
   ];
+
+  useEffect(() => {
+    const siteId = 3891828;
+    const hotjarVersion = 6;
+    Hotjar.init(siteId, hotjarVersion);
+  });
   return (
     <>
       <Container style={{ marginBottom: "100px" }}>

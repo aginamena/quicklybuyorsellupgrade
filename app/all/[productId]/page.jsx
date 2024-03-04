@@ -24,40 +24,52 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function NikeSneakerDetails({ params }) {
-  const details = await getFromFirestore(`products/${params.productId}`);
-  const creatorOfProduct = await getFromFirestore(
-    `profiles/${details.creatorOfProduct}`
-  );
-  const productDetails = { ...details };
+  let details = null;
+  let creatorOfProduct = null;
+  let storeDetails = null;
+
+  try {
+    details = await getFromFirestore(`products/${params.productId}`);
+    creatorOfProduct = await getFromFirestore(
+      `profiles/${details.creatorOfProduct}`
+    );
+    storeDetails = await getFromFirestore(
+      `store-details/${details.creatorOfProduct}`
+    );
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <Container style={{ marginBottom: "50px" }}>
       <Toolbar />
       <Grid container spacing={3}>
-        {productDetails.files && (
+        {details.files && (
           <Grid item md={8} xs={12}>
-            <ImageGalleryCmp images={productDetails.files} />
+            <ImageGalleryCmp images={details.files} />
           </Grid>
         )}
         <Grid item md={4} xs={12}>
           <Contact
-            title={productDetails.title}
-            amount={productDetails.amount}
-            productId={productDetails.productId}
+            title={details.title}
+            amount={details.amount}
+            productId={details.productId}
             creatorOfProduct={creatorOfProduct}
+            description={storeDetails?.description}
           />
         </Grid>
       </Grid>
       <Specification
-        productId={productDetails.productId}
-        productStatus={productDetails.productStatus}
-        sizes={productDetails.sizes}
-        location={productDetails.location}
-        type={productDetails.type}
-        color={productDetails.color}
+        productId={details.productId}
+        productStatus={details.productStatus}
+        sizes={details.sizes}
+        location={details.location}
+        type={details.type}
+        color={details.color}
+        storeDetails={storeDetails}
       />
       <AdminPanel productId={params.productId} />
-      <SimilarProducts amount={productDetails.amount} />
+      <SimilarProducts amount={details.amount} />
     </Container>
   );
 }

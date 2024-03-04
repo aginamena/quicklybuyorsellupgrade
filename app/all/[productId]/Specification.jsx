@@ -3,7 +3,6 @@
 import { isUserAdmin } from "@/util";
 import { Box, Paper, Typography, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
-import ProductSummary from "./ProductSummary";
 
 export default function Specification({
   productId,
@@ -12,6 +11,7 @@ export default function Specification({
   location,
   color,
   type,
+  storeDetails,
 }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
@@ -53,12 +53,7 @@ export default function Specification({
         </Box>
       )}
 
-      <Box
-      // sx={{
-      //   borderBottom: 1,
-      //   borderColor: "divider",
-      // }}
-      >
+      <Box>
         <Tabs
           value={currentTab}
           onChange={handleChange}
@@ -68,21 +63,19 @@ export default function Specification({
         >
           <Tab label="Product summary" />
           <Tab label="Return and refund policy" />
-          <Tab label="shipping and delivery" />
+          <Tab label="Shipping and payment" />
         </Tabs>
         <CustomTabPanel value={currentTab} index={0}>
-          <ProductSummary
-            sizes={sizes}
-            type={type}
-            color={color}
-            location={location}
-          />
+          <Typography>Sizes: {sizes.toString()}</Typography>
+          <Typography>Type: {type}</Typography>
+          <Typography>Color: {color}</Typography>
+          <Typography>Location: {location}</Typography>
         </CustomTabPanel>
         <CustomTabPanel value={currentTab} index={1}>
-          Item Two
+          {storeDetails?.return_and_refund}
         </CustomTabPanel>
         <CustomTabPanel value={currentTab} index={2}>
-          Item Three
+          {storeDetails?.shipping_and_payment}
         </CustomTabPanel>
       </Box>
     </Paper>
@@ -102,7 +95,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Box>{children}</Box>
         </Box>
       )}
     </div>

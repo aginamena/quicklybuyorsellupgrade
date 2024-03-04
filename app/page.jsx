@@ -56,10 +56,10 @@ export default function Home() {
         />
         <Typography
           variant="h6"
-          style={{
+          sx={{
             textAlign: "center",
             marginBottom: "30px",
-            marginTop: "100px",
+            marginTop: { xs: "50px", md: "100px" },
           }}
         >
           We provide
@@ -74,15 +74,6 @@ export default function Home() {
           <NikeTypes imageSrc="/root/shoes.jpg" type="Shoes" />
           <NikeTypes imageSrc="/root/slides.jpg" type="Slides" />
         </Box>
-        <Box
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: "30px",
-          }}
-        ></Box>
-
         <TodaysProducts />
         <HowItWorks cards={cards} />
         <ReveiwsAndRatings />

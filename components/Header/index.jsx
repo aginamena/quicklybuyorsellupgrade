@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ParentCmp } from "./style";
 
 import Auth from "./Auth";
-import SearchBarCmp from "./SearchBarCmp";
+// import SearchBarCmp from "./SearchBarCmp";
 import Hambuger from "./Hambuger";
 
 export default function Header() {
@@ -44,17 +44,17 @@ export default function Header() {
               </Link>
             </Box>
           </Box>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          {/* <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <SearchBarCmp />
-          </Box>
+          </Box> */}
           <Box>
             <Auth />
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ marginTop: "10px", display: { xs: "block", sm: "none" } }}>
+      {/* <Box sx={{ marginTop: "10px", display: { xs: "block", sm: "none" } }}>
         <SearchBarCmp />
-      </Box>
+      </Box> */}
     </ParentCmp>
   );
 }

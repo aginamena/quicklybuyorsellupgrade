@@ -1,29 +1,17 @@
 "use client";
-import { getUser } from "@/util";
-import {
-  Box,
-  Button,
-  Paper,
-  Typography,
-  Rating,
-  CardHeader,
-  CardContent,
-  Avatar,
-} from "@mui/material";
+import { Box, Button, Paper, Rating, Typography } from "@mui/material";
 
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import currencyFormatter from "currency-formatter";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import CardCmp from "@/components/CardCmp";
-
 export default function Contact({
   title,
   amount,
   productId,
   creatorOfProduct,
+  description,
 }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
 
@@ -46,9 +34,6 @@ export default function Contact({
         >
           {formattedAmount}
         </Typography>
-        {/* <Typography>
-          To place your order, contact <b>Mena Agina</b> on facebook .
-        </Typography> */}
         <Box
           style={{
             display: "flex",
@@ -56,14 +41,14 @@ export default function Contact({
           }}
         >
           <Image
-            src={creatorOfProduct.photoURL}
+            src={creatorOfProduct?.photoURL}
             width={100}
             height={100}
-            alt={`${creatorOfProduct.displayName}/profile picture`}
+            alt={`${creatorOfProduct?.displayName}/profile picture`}
             style={{ borderRadius: "50px", marginRight: "10px" }}
           />
           <Box>
-            <Typography>{creatorOfProduct.displayName}</Typography>
+            <Typography>{creatorOfProduct?.displayName}</Typography>
             <Box
               style={{
                 display: "flex",
@@ -102,30 +87,10 @@ export default function Contact({
         </Box>
       </Paper>
       <Paper style={{ marginTop: "30px", padding: "30px", color: "#dedede" }}>
-        <CardCmp>
-          <CardHeader
-            avatar={
-              <Image
-                src={creatorOfProduct.photoURL}
-                width={50}
-                height={50}
-                alt={`${creatorOfProduct.displayName}/profile picture`}
-                style={{ borderRadius: "50px" }}
-              />
-            }
-            title="Mercy Adams"
-          />
-          <CardContent>
-            <Rating defaultValue={5} readOnly />
-            <Typography variant="body2" color="text.secondary">
-              I sell products here and sometimes i buy from other providers.
-              With the vast amount of products on the site, I can easily find
-              the specific product(s) i am looking for and contact the seller.
-              This was how many of my clients contacted me because they could
-              easily find my products on the site.
-            </Typography>
-          </CardContent>
-        </CardCmp>
+        <FormatQuoteIcon />
+        <Typography>{description}</Typography>
+        <FormatQuoteIcon />
+        <Typography>{creatorOfProduct?.displayName}</Typography>
       </Paper>
     </>
   );

@@ -2,7 +2,6 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Toolbar from "@mui/material/Toolbar";
 
 import {
   collection,
@@ -32,10 +31,13 @@ export default async function TodaysProducts() {
 
   return (
     <Container>
-      <Toolbar />
       <Typography
         variant="h6"
-        style={{ textAlign: "center", marginBottom: "30px" }}
+        sx={{
+          textAlign: "center",
+          marginBottom: "30px",
+          marginTop: { md: "100px" },
+        }}
       >
         Todays top products
       </Typography>

@@ -1,11 +1,9 @@
 import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
-import Footer from "@/components/Footer";
 import HowItWorks from "@/components/HowItWorks";
 import ValueProposition from "@/components/ValueProposition";
 import Image from "next/image";
@@ -38,7 +36,7 @@ export default function Home() {
   ];
   return (
     <>
-      <Container>
+      <Container style={{ marginBottom: "100px" }}>
         <Toolbar />
         <ValueProposition
           proposition={
@@ -58,10 +56,10 @@ export default function Home() {
         />
         <Typography
           variant="h6"
-          style={{
+          sx={{
             textAlign: "center",
             marginBottom: "30px",
-            marginTop: "100px",
+            marginTop: { xs: "50px", md: "100px" },
           }}
         >
           We provide
@@ -76,21 +74,10 @@ export default function Home() {
           <NikeTypes imageSrc="/root/shoes.jpg" type="Shoes" />
           <NikeTypes imageSrc="/root/slides.jpg" type="Slides" />
         </Box>
-        <Box
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: "30px",
-          }}
-        ></Box>
-
         <TodaysProducts />
         <HowItWorks cards={cards} />
         <ReveiwsAndRatings />
       </Container>
-      <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
-      <Footer />
     </>
   );
 }

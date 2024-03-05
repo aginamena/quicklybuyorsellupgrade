@@ -1,4 +1,3 @@
-"use client";
 import { Button, Toolbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -7,11 +6,9 @@ import Link from "next/link";
 
 import HowItWorks from "@/components/HowItWorks";
 import ValueProposition from "@/components/ValueProposition";
-import Image from "next/image";
 import ReveiwsAndRatings from "./ReviewAndRatings";
 import TodaysProducts from "./TodaysProducts";
-import { useEffect } from "react";
-import Hotjar from "@hotjar/browser";
+import NikeTypes from "@/components/NikeTypes";
 
 //refetching the data every 5minutes (60 * 5 = 300)
 export const revalidate = 300;
@@ -38,11 +35,6 @@ export default function Home() {
     },
   ];
 
-  useEffect(() => {
-    const siteId = 3891828;
-    const hotjarVersion = 6;
-    Hotjar.init(siteId, hotjarVersion);
-  });
   return (
     <>
       <Container style={{ marginBottom: "100px" }}>
@@ -88,30 +80,5 @@ export default function Home() {
         <ReveiwsAndRatings />
       </Container>
     </>
-  );
-}
-
-function NikeTypes({ imageSrc, type }) {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        marginBottom: { xs: "40px", sm: "0" },
-      }}
-    >
-      <Image
-        src={imageSrc}
-        width={200}
-        height={200}
-        alt={type}
-        style={{ borderRadius: "70px" }}
-      />
-      <Typography style={{ fontSize: "20px", marginTop: "18px" }}>
-        {type}
-      </Typography>
-    </Box>
   );
 }

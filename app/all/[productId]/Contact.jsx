@@ -6,6 +6,8 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import currencyFormatter from "currency-formatter";
 import Image from "next/image";
+import Link from "next/link";
+import { getUser } from "@/util";
 export default function Contact({
   title,
   amount,
@@ -15,6 +17,17 @@ export default function Contact({
 }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
 
+  function sendMessage() {
+    const user = getUser();
+    if (user) {
+      window.open(
+        `https://api.whatsapp.com/send?phone=${creatorOfProduct.phoneNumber}&text=Hello ${creatorOfProduct.displayName} this is ${user.displayName} from QBOS. I'm interested in your nike shoe. I will send you an image of the product with the size and color. Thank you.`,
+        "_blank"
+      );
+    } else {
+      alert("To send a message, please sign in first");
+    }
+  }
   return (
     <>
       <Paper style={{ padding: "30px" }}>
@@ -70,13 +83,15 @@ export default function Contact({
             </Box>
             <Rating name="read-only" value={5} readOnly />
             <Button
-              style={{
-                color: "	#25d366",
-                display: "flex",
-                borderColor: "#25d366",
-              }}
               size="large"
               variant="outlined"
+              style={{
+                borderColor: "#25d366",
+                color: "	#25d366",
+                display: "flex",
+                textDecoration: "none",
+              }}
+              onClick={sendMessage}
             >
               <Typography style={{ marginRight: "10px" }}>
                 Message me

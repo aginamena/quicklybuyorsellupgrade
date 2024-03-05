@@ -11,16 +11,16 @@ import CardCmp from "@/components/CardCmp";
 export default function ReveiwsAndRatings() {
   const reviews = [
     {
-      src: "root/ngozi_samuels.jpeg",
-      name: "Ngozi Samuels",
+      src: "root/obediah_fragrant.jpg",
+      name: "Obediah Fragrant",
       description:
-        "It's very easy to advertise my products for sale here. One of the reasons i like QBOS products is that you will only find high quality products for sale here.",
+        "It's nice doing business with QBOS. I ordered a NIKE shoe from them and they give me exactly what I order they're very honest and trusted",
     },
     {
-      src: "root/celeb_johnson.jpeg",
-      name: "Celeb Johnson",
+      src: "root/helen_okolie.jpg",
+      name: "Helen Okolie",
       description:
-        "Connecting with sellers your local sellers is the fastest way to view and receive products, instead of waiting for days for the products to be shipped to you for review. One of the reasons i keep coming back to QBOS is that their site is easy to use.",
+        "It was easy getting my products on the site and connecting with people who need my products. Kudos Qbos",
     },
     {
       src: "root/mercy_adams.jpeg",

@@ -15,7 +15,7 @@ export default function HowItWorks({ cards }) {
       >
         How it works
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} justifyContent="space-evenly">
         {cards.map(({ title, imagePath }, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
             <CardCmp>

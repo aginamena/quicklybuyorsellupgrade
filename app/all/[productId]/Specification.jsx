@@ -12,6 +12,7 @@ export default function Specification({
   color,
   type,
   storeDetails,
+  productDescription,
 }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
@@ -70,6 +71,9 @@ export default function Specification({
           <Typography>Type: {type}</Typography>
           <Typography>Color: {color}</Typography>
           <Typography>Location: {location}</Typography>
+          <Typography style={{ marginTop: "20px" }}>
+            {productDescription}
+          </Typography>
         </CustomTabPanel>
         <CustomTabPanel value={currentTab} index={1}>
           {storeDetails?.return_and_refund}

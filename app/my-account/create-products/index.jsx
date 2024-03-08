@@ -332,6 +332,23 @@ export default function CreateProducts() {
           })
         }
       />
+      <TextField
+        label="Description"
+        multiline
+        rows={4}
+        variant="outlined"
+        style={{ marginTop: "30px" }}
+        placeholder="What else do you want buyers to know about this product?"
+        defaultValue={specification.description}
+        value={specification.description}
+        fullWidth
+        onChange={(e) =>
+          setSpecification({
+            ...specification,
+            description: e.target.value,
+          })
+        }
+      />
       <Box style={{ marginTop: "40px", marginBottom: "30px" }}>
         <Button
           variant="outlined"

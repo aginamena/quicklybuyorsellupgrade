@@ -20,12 +20,12 @@ export default function Home() {
       imagePath: "root/view_wide_selection_of_products.jpg",
     },
     {
-      title: "Select the product that suits you best",
+      title: "Select the product you want.",
       imagePath: "root/select_the_product.jpg",
     },
     {
       title:
-        "Send a detailed message to the seller regarding the product you're interested in and await their response.",
+        "Send a message to the QBOS regarding the product you're interested in and await our response.",
       imagePath: "root/send_message.jpg",
     },
   ];

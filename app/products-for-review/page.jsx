@@ -15,7 +15,6 @@ export const revalidate = 300;
 export default async function ProductsForReview() {
   const q = query(
     collection(firestore, "products"),
-    where("category", "==", "nike-sneakers"),
     where("productStatus", "==", "On review"),
     orderBy("productId", "desc"),
     limit(13)

@@ -14,7 +14,6 @@ import Typography from "@mui/material/Typography";
 import red from "@mui/material/colors/red";
 
 import CardCmp from "@/components/CardCmp";
-import Footer from "@/components/Footer";
 import HowItWorks from "@/components/HowItWorks";
 import ValueProposition from "@/components/ValueProposition";
 
@@ -179,8 +178,6 @@ export default function SellYourProducts() {
           ))}
         </Grid>
       </Container>
-      <Divider sx={{ borderBottomWidth: "5px", marginTop: "50px" }} />
-      <Footer />
     </>
   );
 }

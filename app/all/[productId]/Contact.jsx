@@ -17,17 +17,7 @@ export default function Contact({
 }) {
   const formattedAmount = currencyFormatter.format(amount, { code: "NGN" });
 
-  function sendMessage() {
-    const user = getUser();
-    if (user) {
-      window.open(
-        `https://api.whatsapp.com/send?phone=${creatorOfProduct.phoneNumber}&text=Hello ${creatorOfProduct.displayName} this is ${user.displayName} from QBOS. I'm interested in your nike shoe. I will send you an image of the product with the size and color. Thank you.`,
-        "_blank"
-      );
-    } else {
-      alert("To send a message, please sign in first");
-    }
-  }
+  const phoneNumber = "+16472232032";
   return (
     <>
       <Paper style={{ padding: "30px" }}>
@@ -82,22 +72,26 @@ export default function Contact({
               </Typography>
             </Box>
             <Rating name="read-only" value={5} readOnly />
-            <Button
-              size="large"
-              variant="outlined"
-              style={{
-                borderColor: "#25d366",
-                color: "	#25d366",
-                display: "flex",
-                textDecoration: "none",
-              }}
-              onClick={sendMessage}
+            <Link
+              target="_blank"
+              href={`https://api.whatsapp.com/send?phone=${phoneNumber}&text=I'm interested in your nike product. I will send an image of the product with the size and color. Thank you.`}
+              style={{ textDecoration: "none" }}
             >
-              <Typography style={{ marginRight: "10px" }}>
-                Message me
-              </Typography>
-              <WhatsAppIcon />
-            </Button>
+              <Button
+                size="large"
+                variant="outlined"
+                style={{
+                  borderColor: "#25d366",
+                  color: "	#25d366",
+                  display: "flex",
+                }}
+              >
+                <Typography style={{ marginRight: "10px" }}>
+                  Contact QBOS
+                </Typography>
+                <WhatsAppIcon />
+              </Button>
+            </Link>
           </Box>
         </Box>
       </Paper>

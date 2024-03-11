@@ -24,7 +24,6 @@ export default function Paginage({ top12ProductsOnReview, hasMoreProducts }) {
   async function getNext12Products() {
     const q = query(
       collection(firestore, "products"),
-      where("category", "==", "nike-sneakers"),
       where("productStatus", "==", "On review"),
       orderBy("productId", "desc"),
       //   ...filterCondition,

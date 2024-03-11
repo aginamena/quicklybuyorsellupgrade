@@ -22,10 +22,8 @@ export default function Paginage({ top12Products, hasMoreProducts }) {
   const [hasMore, setHasMore] = useState(hasMoreProducts);
 
   async function getNext12Products() {
-    const selectedCategory = "nike-sneakers";
     const q = query(
       collection(firestore, "products"),
-      where("category", "==", selectedCategory),
       where("productStatus", "==", "Published"),
       orderBy("productId", "desc"),
       //   ...filterCondition,

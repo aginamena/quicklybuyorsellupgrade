@@ -36,7 +36,7 @@ export default async function TodaysProducts() {
         sx={{
           textAlign: "center",
           marginBottom: "30px",
-          marginTop: { md: "100px" },
+          marginTop: { md: "60px" },
         }}
       >
         Todays top products

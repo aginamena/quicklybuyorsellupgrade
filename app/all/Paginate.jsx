@@ -109,7 +109,6 @@ export default function Paginage({ filterCondition }) {
     async function init() {
       const q = generateQuery(null);
       const filteredProducts = await executeQueryOnProductsCollection(q);
-      console.log(filteredProducts);
       if (filteredProducts.length < 13) {
         setHasMore(false);
       } else {
@@ -125,14 +124,12 @@ export default function Paginage({ filterCondition }) {
       products.length == 0 ? null : products[products.length - 1].productId
     );
     const next12Products = await executeQueryOnProductsCollection(query);
-    console.log(next12Products);
     if (next12Products.length < 13) {
       setHasMore(false);
     } else {
       setHasMore(true);
     }
     setProducts([...products, ...next12Products.slice(0, 12)]);
-    console.log(hasMore);
   }
 
   return (

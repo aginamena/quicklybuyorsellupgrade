@@ -10,30 +10,28 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function Filter({ drawerCmp, setDrawerCmp }) {
-  const searchParams = useSearchParams();
-  const searchSize = searchParams.get("size");
-  const searchColor = searchParams.get("color");
-
-  const [state, setState] = useState({
-    size: searchSize ? parseInt(searchSize) : 0,
-    color: searchColor ? searchColor : "",
-  });
+export default function Filter({
+  drawerCmp,
+  setDrawerCmp,
+  setFilterCondition,
+}) {
+  const [state, setState] = useState({});
 
   function handleSubmit() {
-    if (state.size == 0 && state.color.length == 0) {
+    if (Object.keys(state).length == 0) {
       alert("Select a size or color");
       return;
     }
-    const url = [];
-    if (state.size != 0) url.push("size=" + state.size);
-    if (state.color.length > 0) url.push("color=" + state.color);
+    setFilterCondition(state);
+  }
 
-    const joinedURL = url.join("&");
-    window.open(`${window.location.origin}/all?${joinedURL}`, "_blank");
+  function clear(fieldName) {
+    const newState = { ...state };
+    delete newState[fieldName];
+    setState(newState);
+    setFilterCondition(newState);
   }
   return (
     <DrawerCmp open={drawerCmp} setDrawerCmp={setDrawerCmp}>
@@ -52,17 +50,15 @@ export default function Filter({ drawerCmp, setDrawerCmp }) {
           <FormControl style={{ marginTop: "20px", marginBottom: "20px" }}>
             <Box style={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h6">Size</Typography>
-              <Button onClick={() => setState({ size: 0, color: state.color })}>
-                clear
-              </Button>
+              <Button onClick={() => clear("size")}>clear</Button>
             </Box>
 
             <RadioGroup
               value={state.size}
               onChange={(event) =>
                 setState((state) => ({
+                  ...state,
                   size: event.target.value,
-                  color: state.color,
                 }))
               }
               style={{ justifyContent: "center" }}
@@ -92,17 +88,15 @@ export default function Filter({ drawerCmp, setDrawerCmp }) {
           <FormControl style={{ marginTop: "20px", marginBottom: "20px" }}>
             <Box style={{ display: "flex", justifyContent: "space-between" }}>
               <Typography variant="h6">Color</Typography>
-              <Button onClick={() => setState({ size: state.size, color: "" })}>
-                clear
-              </Button>
+              <Button onClick={() => clear("color")}>clear</Button>
             </Box>
 
             <RadioGroup
               value={state.color}
               onChange={(event) =>
                 setState((state) => ({
+                  ...state,
                   color: event.target.value,
-                  size: state.size,
                 }))
               }
               style={{ justifyContent: "center" }}

@@ -66,7 +66,6 @@ export default async function NikeSneakerDetails({ params }) {
         location={details.location}
         type={details.type}
         color={details.color}
-        storeDetails={storeDetails}
         productDescription={details.description}
       />
       <AdminPanel productId={params.productId} />
